@@ -448,8 +448,8 @@ export const AuthView: React.FC<AuthViewProps> = ({ onAuthSuccess }) => {
   const passwordStrength: PasswordStrength = evaluatePasswordStrength(password);
 
   return (
-    <div className="w-full max-w-md mx-auto p-4">
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+    <div className="w-full max-w-md mx-auto px-2 sm:px-4 py-4">
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl space-y-5 sm:space-y-6">
         {/* Top Header */}
         <div className="text-center space-y-2">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center mx-auto shadow-md">
@@ -468,17 +468,17 @@ export const AuthView: React.FC<AuthViewProps> = ({ onAuthSuccess }) => {
         </div>
 
         {/* System Automated Ready Badge */}
-        <div className="flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-bold text-emerald-800 dark:text-emerald-300">
-              ⚡ النظام يعمل ذاتياً 100% بدون أي إعدادات أو انتظار
+        <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <span className="font-bold text-emerald-800 dark:text-emerald-300 text-[11px] sm:text-xs">
+              ⚡ جاهز للعمل المباشر
             </span>
           </div>
           <button
             type="button"
             onClick={() => setShowSupabaseModal(true)}
-            className="text-[11px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 underline cursor-pointer"
+            className="text-[11px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 underline cursor-pointer shrink-0"
             title="إعدادات متقدمة اختيارية للمطورين"
           >
             ⚙️ إعدادات
@@ -491,11 +491,11 @@ export const AuthView: React.FC<AuthViewProps> = ({ onAuthSuccess }) => {
             type="button"
             onClick={() => onAuthSuccess(quickGuestLogin())}
             id="instant-auto-login-btn"
-            className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-sm flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-600/25 active:scale-[0.99] transition-all cursor-pointer border border-emerald-400/30"
+            className="w-full py-3 px-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 active:scale-[0.99] transition-all cursor-pointer border border-emerald-400/30"
           >
-            <Sparkles className="w-4 h-4 text-emerald-200 animate-bounce" />
-            <span>⚡ دخول فوري مباشر (تشغيل تلقائي بدون إدخال بيانات)</span>
-            <ArrowRight className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 text-emerald-200 animate-bounce shrink-0" />
+            <span>⚡ دخول فوري مباشر (بدون تسجيل)</span>
+            <ArrowRight className="w-4 h-4 shrink-0" />
           </button>
         )}
 
@@ -548,15 +548,15 @@ export const AuthView: React.FC<AuthViewProps> = ({ onAuthSuccess }) => {
               onClick={handleGoogleAuthClick}
               disabled={loading}
               id="google-signin-btn"
-              className="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-750 active:scale-[0.99] text-zinc-800 dark:text-zinc-100 font-medium text-sm flex items-center justify-center gap-3 shadow-xs hover:shadow transition-all cursor-pointer disabled:opacity-60"
+              className="w-full py-2.5 px-4 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-750 active:scale-[0.99] text-zinc-800 dark:text-zinc-100 font-medium text-xs sm:text-sm flex items-center justify-center gap-2.5 shadow-xs hover:shadow transition-all cursor-pointer disabled:opacity-60"
             >
-              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
                 <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
                 <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
                 <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
               </svg>
-              <span>المتابعة باستخدام Google (Google Auth)</span>
+              <span>المتابعة باستخدام Google</span>
             </button>
 
             <div className="relative flex items-center justify-center">
@@ -567,6 +567,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onAuthSuccess }) => {
             </div>
           </div>
         )}
+
 
         {/* 1. LOGIN FORM */}
         {mode === 'login' && (

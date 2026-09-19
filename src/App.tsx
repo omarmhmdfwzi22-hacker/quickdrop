@@ -838,7 +838,7 @@ export default function App() {
           hasActiveSession={false}
           currentUser={null}
         />
-        <main className="flex-1 flex items-center justify-center">
+        <main className="flex-1 flex flex-col justify-center items-center py-6 px-3 sm:px-4 w-full max-w-full overflow-x-hidden">
           <AuthView onAuthSuccess={(user) => {
             setCurrentUser(user);
             setCurrentTab('transfer');
@@ -849,7 +849,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-blue-500 selection:text-white antialiased">
+    <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-blue-500 selection:text-white antialiased overflow-x-hidden w-full max-w-full">
       {/* Top Navigation */}
       <Navbar
         currentTab={currentTab}
@@ -866,7 +866,8 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-16">
+      <main className="flex-1 pb-24 sm:pb-16 w-full max-w-full overflow-x-hidden">
+
         {currentTab === 'profile' ? (
           <ProfileView
             user={currentUser}

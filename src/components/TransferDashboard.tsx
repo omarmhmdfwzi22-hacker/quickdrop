@@ -257,25 +257,26 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
       )}
 
       {/* Connected Devices Bar */}
-      <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20">
+      <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20 shrink-0">
             {peerDeviceInfo?.type === 'mobile' ? (
-              <Smartphone className="w-5 h-5" />
+              <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" />
             ) : (
-              <Laptop className="w-5 h-5" />
+              <Laptop className="w-4 h-4 sm:w-5 sm:h-5" />
             )}
           </div>
-          <div>
-            <div className="flex items-center gap-2">
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5">
               <span className="text-xs text-zinc-500 dark:text-zinc-400">متصل بـ</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             </div>
-            <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
-              {peerDeviceInfo?.name || 'الجهاز المقترن (Connected Peer)'}
+            <h2 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-[200px] sm:max-w-xs">
+              {peerDeviceInfo?.name || 'الجهاز المقترن'}
             </h2>
           </div>
         </div>
+
 
         {/* Auto-accept Toggle */}
         <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 cursor-pointer select-none">
@@ -422,11 +423,11 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
           {/* File Upload / Drop Area */}
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="group relative border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-3xl p-8 sm:p-12 text-center bg-white dark:bg-zinc-900/60 hover:bg-blue-50/20 dark:hover:bg-blue-950/20 transition-all cursor-pointer shadow-2xs"
+            className="group relative border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-2xl sm:rounded-3xl p-5 sm:p-12 text-center bg-white dark:bg-zinc-900/60 hover:bg-blue-50/20 dark:hover:bg-blue-950/20 transition-all cursor-pointer shadow-2xs"
           >
             <div className="max-w-md mx-auto space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center border border-blue-100 dark:border-blue-900/60 group-hover:scale-105 transition-transform">
-                <UploadCloud className="w-8 h-8" />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center border border-blue-100 dark:border-blue-900/60 group-hover:scale-105 transition-transform">
+                <UploadCloud className="w-7 h-7 sm:w-8 sm:h-8" />
               </div>
 
               <div>
@@ -442,7 +443,7 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
               <div className="flex flex-wrap items-center justify-center gap-2 pt-2" onClick={(e) => e.stopPropagation()}>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-sm transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer"
+                  className="flex-1 sm:flex-initial min-w-[120px] px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-sm transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer"
                   id="select-files-btn"
                 >
                   <File className="w-3.5 h-3.5" />
@@ -452,7 +453,7 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
                 {/* Send Photos / Images */}
                 <button
                   onClick={() => imageInputRef.current?.click()}
-                  className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer"
+                  className="flex-1 sm:flex-initial min-w-[120px] px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer"
                   id="select-images-btn"
                 >
                   <ImageIcon className="w-3.5 h-3.5 text-blue-500" />
@@ -463,7 +464,7 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
                 {isFolderSupported && (
                   <button
                     onClick={() => folderInputRef.current?.click()}
-                    className="px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer"
+                    className="flex-1 sm:flex-initial min-w-[120px] px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer"
                     id="select-folder-btn"
                   >
                     <FolderUp className="w-3.5 h-3.5 text-amber-500" />
@@ -475,7 +476,7 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
                 {onUploadCloudFallback && (
                   <button
                     onClick={() => cloudFileInputRef.current?.click()}
-                    className="px-3.5 py-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-medium text-xs border border-purple-200 dark:border-purple-800 transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer"
+                    className="w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-medium text-xs border border-purple-200 dark:border-purple-800 transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer"
                     title="رفع وتمرير الملف عبر Supabase Storage كبديل إذا تعذر P2P"
                   >
                     <CloudUpload className="w-3.5 h-3.5 text-purple-500" />
@@ -483,6 +484,7 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
                   </button>
                 )}
               </div>
+
 
               {/* Hidden Inputs */}
               <input

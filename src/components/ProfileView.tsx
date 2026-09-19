@@ -199,24 +199,24 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
+    <div className="max-w-3xl mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-5 sm:space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-            <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-            <span>إدارة الحساب الشخصي (Profile Settings)</span>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <User className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 dark:text-blue-400 shrink-0" />
+            <span className="break-words">إدارة الحساب الشخصي (Profile Settings)</span>
           </h2>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
             بيانات حسابك وصورتك الرمزية محفوظة في قاعدة بيانات Supabase وسلة التخزين السحابي.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => setShowSqlModal(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-900 transition-colors cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-900 transition-colors cursor-pointer"
             title="كود SQL لإنشاء جداول Supabase"
           >
             <Code2 className="w-3.5 h-3.5" />
@@ -226,7 +226,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
           <button
             type="button"
             onClick={onLogout}
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200 dark:border-rose-900/50 transition-colors cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200 dark:border-rose-900/50 transition-colors cursor-pointer"
             id="profile-logout-btn"
           >
             <LogOut className="w-3.5 h-3.5" />
@@ -237,21 +237,22 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
 
       {/* Alerts */}
       {errorMsg && (
-        <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2.5">
+        <div className="p-3.5 sm:p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2.5">
           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <span className="leading-relaxed">{errorMsg}</span>
         </div>
       )}
 
       {successMsg && (
-        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900 text-xs text-emerald-700 dark:text-emerald-300 flex items-start gap-2.5">
+        <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900 text-xs text-emerald-700 dark:text-emerald-300 flex items-start gap-2.5">
           <CheckCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <span className="leading-relaxed">{successMsg}</span>
         </div>
       )}
 
       {/* Main Profile Card */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-8">
+      <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-6 sm:space-y-8">
+
         {/* AVATAR SECTION */}
         <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-zinc-100 dark:border-zinc-800">
           <div className="relative group cursor-pointer" onClick={() => fileInputRef.current?.click()}>
@@ -289,12 +290,12 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               {user.email}
             </p>
 
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-2 pt-1 w-full">
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploadingAvatar}
-                className="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto px-3.5 py-2 sm:py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition-colors cursor-pointer disabled:opacity-50"
               >
                 <UploadCloud className="w-3.5 h-3.5" />
                 <span>{uploadingAvatar ? 'جاري الرفع لـ Storage...' : 'رفع صورة جديدة 📸'}</span>
@@ -303,7 +304,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               <button
                 type="button"
                 onClick={handleResetToGeneratedAvatar}
-                className="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-750 text-zinc-700 dark:text-zinc-300 text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="w-full sm:w-auto px-3.5 py-2 sm:py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-750 text-zinc-700 dark:text-zinc-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                 <span>صورة هندسية تلقائية</span>
@@ -314,7 +315,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
 
         {/* PROFILE DETAILS FORM */}
         <form onSubmit={handleSaveProfile} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             {/* Display Name */}
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block">
@@ -327,7 +328,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="اسمك الكامل"
-                  className="w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   id="profile-name-input"
                 />
                 <User className="w-4 h-4 text-zinc-400 absolute right-3 top-3 pointer-events-none" />
@@ -345,12 +346,13 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   value={deviceName}
                   onChange={(e) => setDeviceName(e.target.value)}
                   placeholder="مثل: MacBook Pro أو iPhone 15"
-                  className="w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   id="profile-devicename-input"
                 />
                 <Laptop className="w-4 h-4 text-zinc-400 absolute right-3 top-3 pointer-events-none" />
               </div>
             </div>
+
 
             {/* Email Address (Readonly) */}
             <div className="space-y-1.5">
@@ -386,11 +388,11 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
             </div>
           </div>
 
-          <div className="flex justify-end pt-2">
+          <div className="pt-2 flex justify-end">
             <button
               type="submit"
               disabled={saving}
-              className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition-all cursor-pointer flex items-center gap-2 disabled:opacity-50"
+              className="w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/20 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
               id="save-profile-btn"
             >
               {saving ? (
@@ -424,13 +426,13 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="8 خانات على الأقل"
-                    className="w-full pl-10 pr-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono"
+                    className="w-full pl-10 pr-3 py-2.5 sm:py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono"
                     dir="ltr"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute left-3 top-2.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer"
+                    className="absolute left-3 top-3 sm:top-2.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                   </button>
@@ -446,7 +448,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   placeholder="أعد إدخال كلمة المرور"
-                  className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono"
+                  className="w-full px-3 py-2.5 sm:py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono"
                   dir="ltr"
                 />
               </div>

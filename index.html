@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>QuickDrop — Cross-Device File & Text Transfer</title>
     <meta name="description" content="Fast, private cross-device peer-to-peer file and text transfer powered by WebRTC." />
     <meta property="og:title" content="QuickDrop — Cross-Device File & Text Transfer" />
@@ -37,12 +37,19 @@
     }
     </script>
     <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
       html, body {
         background-color: #09090b;
         margin: 0;
         padding: 0;
         min-height: 100%;
         min-height: 100dvh;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+        -webkit-text-size-adjust: 100%;
       }
       html.light, html.light body {
         background-color: #fafafa;
@@ -50,6 +57,13 @@
       #root {
         min-height: 100%;
         min-height: 100dvh;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+      }
+      /* Safe area inset support for mobile bottom nav on notch devices */
+      .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom, 1rem);
       }
     </style>
   </head>

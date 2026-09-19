@@ -97,10 +97,10 @@ export const PairingCard: React.FC<PairingCardProps> = ({
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+    <div className="max-w-md mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 sm:p-8 shadow-sm space-y-5 sm:space-y-6">
       {/* Header */}
       <div className="text-center space-y-1">
-        <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+        <h2 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100">
           Connect another device
         </h2>
         <p className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -110,8 +110,8 @@ export const PairingCard: React.FC<PairingCardProps> = ({
 
       {/* QR Code Container */}
       <div className="flex flex-col items-center justify-center">
-        <div className="p-3 bg-white rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-inner">
-          <canvas ref={canvasRef} className="rounded-lg" />
+        <div className="p-2 sm:p-3 bg-white rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-inner max-w-full overflow-hidden">
+          <canvas ref={canvasRef} className="rounded-lg max-w-full h-auto block" />
         </div>
 
         {/* Expiry Pill */}
@@ -120,6 +120,7 @@ export const PairingCard: React.FC<PairingCardProps> = ({
           <span>Expires in <strong className="text-zinc-700 dark:text-zinc-200">{timeLeft}</strong></span>
         </div>
       </div>
+
 
       {/* Manual Pairing Code */}
       <div className="space-y-2">

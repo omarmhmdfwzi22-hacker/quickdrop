@@ -18,6 +18,7 @@ import {
   XCircle,
   Wifi,
   WifiOff,
+  User,
   LogOut
 } from "lucide-react";
 
@@ -112,7 +113,7 @@ var UserAvatar = ({
 };
 
 // src/components/Navbar.tsx
-import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
+import { Fragment, jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 var Navbar = ({
   currentTab,
   onTabChange,
@@ -176,138 +177,215 @@ var Navbar = ({
         return null;
     }
   };
-  return /* @__PURE__ */ jsx2("header", { className: "sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors", children: /* @__PURE__ */ jsxs2("div", { className: "max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4", children: [
-    /* @__PURE__ */ jsx2("div", { className: "flex items-center gap-3", children: /* @__PURE__ */ jsxs2(
-      "button",
-      {
-        onClick: () => onTabChange("transfer"),
-        className: "flex items-center gap-2.5 text-left group focus:outline-none",
-        id: "brand-home-btn",
-        children: [
-          /* @__PURE__ */ jsx2("div", { className: "w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-600 text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform", children: /* @__PURE__ */ jsx2(ArrowLeftRight, { className: "w-5 h-5" }) }),
-          /* @__PURE__ */ jsx2("div", { children: /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-1.5", children: [
-            /* @__PURE__ */ jsx2("span", { className: "font-semibold text-base tracking-tight text-zinc-900 dark:text-zinc-100", children: "QuickDrop" }),
-            /* @__PURE__ */ jsx2("span", { className: "text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300", children: "P2P" })
-          ] }) })
-        ]
-      }
-    ) }),
-    /* @__PURE__ */ jsxs2("div", { className: "hidden md:flex items-center gap-3", children: [
-      getConnectionBadge(),
-      timeLeft && /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700", children: [
-        /* @__PURE__ */ jsx2(Clock, { className: "w-3 h-3 text-zinc-400" }),
-        /* @__PURE__ */ jsxs2("span", { children: [
-          "Expires in ",
-          timeLeft
+  return /* @__PURE__ */ jsxs2(Fragment, { children: [
+    /* @__PURE__ */ jsx2("header", { className: "sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors", children: /* @__PURE__ */ jsxs2("div", { className: "max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3", children: [
+      /* @__PURE__ */ jsx2("div", { className: "flex items-center gap-2 sm:gap-3 shrink-0", children: /* @__PURE__ */ jsxs2(
+        "button",
+        {
+          onClick: () => onTabChange("transfer"),
+          className: "flex items-center gap-2 sm:gap-2.5 text-left group focus:outline-none",
+          id: "brand-home-btn",
+          children: [
+            /* @__PURE__ */ jsx2("div", { className: "w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-600 text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform", children: /* @__PURE__ */ jsx2(ArrowLeftRight, { className: "w-4 h-4 sm:w-5 sm:h-5" }) }),
+            /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-1.5", children: [
+              /* @__PURE__ */ jsx2("span", { className: "font-bold text-sm sm:text-base tracking-tight text-zinc-900 dark:text-zinc-100", children: "QuickDrop" }),
+              /* @__PURE__ */ jsx2("span", { className: "text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300", children: "P2P" })
+            ] })
+          ]
+        }
+      ) }),
+      /* @__PURE__ */ jsxs2("div", { className: "hidden md:flex items-center gap-3", children: [
+        getConnectionBadge(),
+        timeLeft && /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700", children: [
+          /* @__PURE__ */ jsx2(Clock, { className: "w-3 h-3 text-zinc-400" }),
+          /* @__PURE__ */ jsxs2("span", { children: [
+            "Expires in ",
+            timeLeft
+          ] })
         ] })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-1.5 sm:gap-2", children: [
-      /* @__PURE__ */ jsxs2("nav", { className: "flex items-center p-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-xs font-medium", children: [
+      ] }),
+      /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-1.5 sm:gap-2", children: [
+        /* @__PURE__ */ jsxs2("nav", { className: "hidden sm:flex items-center p-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 text-xs font-medium", children: [
+          /* @__PURE__ */ jsx2(
+            "button",
+            {
+              onClick: () => onTabChange("transfer"),
+              className: `px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "transfer" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
+              id: "nav-tab-transfer",
+              children: "Transfer"
+            }
+          ),
+          /* @__PURE__ */ jsxs2(
+            "button",
+            {
+              onClick: () => onTabChange("history"),
+              className: `px-3 py-1.5 rounded-md transition-all flex items-center gap-1 cursor-pointer ${currentTab === "history" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
+              id: "nav-tab-history",
+              children: [
+                /* @__PURE__ */ jsx2(History, { className: "w-3.5 h-3.5" }),
+                /* @__PURE__ */ jsx2("span", { children: "History" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs2(
+            "button",
+            {
+              onClick: () => onTabChange("privacy"),
+              className: `hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "privacy" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
+              id: "nav-tab-privacy",
+              children: [
+                /* @__PURE__ */ jsx2(ShieldCheck, { className: "w-3.5 h-3.5" }),
+                /* @__PURE__ */ jsx2("span", { children: "Privacy" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxs2(
+            "button",
+            {
+              onClick: () => onTabChange("help"),
+              className: `inline-flex items-center gap-1 px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "help" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
+              id: "nav-tab-help",
+              children: [
+                /* @__PURE__ */ jsx2(HelpCircle, { className: "w-3.5 h-3.5" }),
+                /* @__PURE__ */ jsx2("span", { children: "Help" })
+              ]
+            }
+          ),
+          currentUser && /* @__PURE__ */ jsxs2(
+            "button",
+            {
+              onClick: () => onTabChange("profile"),
+              className: `flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "profile" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
+              id: "nav-tab-profile",
+              title: "\u0627\u0644\u062D\u0633\u0627\u0628 \u0627\u0644\u0634\u062E\u0635\u064A",
+              children: [
+                /* @__PURE__ */ jsx2(
+                  UserAvatar,
+                  {
+                    name: currentUser.name,
+                    avatarUrl: currentUser.avatarUrl,
+                    size: "xs"
+                  }
+                ),
+                /* @__PURE__ */ jsx2("span", { className: "max-w-[80px] md:max-w-[110px] truncate", children: currentUser.name || "\u062D\u0633\u0627\u0628\u064A" })
+              ]
+            }
+          )
+        ] }),
+        hasActiveSession && onEndSession && /* @__PURE__ */ jsxs2(
+          "button",
+          {
+            onClick: onEndSession,
+            className: "flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 transition-colors cursor-pointer",
+            id: "end-session-btn",
+            title: "\u0625\u0646\u0647\u0627\u0621 \u0627\u0644\u062C\u0644\u0633\u0629",
+            children: [
+              /* @__PURE__ */ jsx2(XCircle, { className: "w-3.5 h-3.5" }),
+              /* @__PURE__ */ jsx2("span", { className: "hidden xs:inline", children: "End" })
+            ]
+          }
+        ),
+        currentUser && onLogout && /* @__PURE__ */ jsx2(
+          "button",
+          {
+            type: "button",
+            onClick: onLogout,
+            className: "p-2 rounded-lg text-zinc-500 hover:text-rose-600 dark:text-zinc-400 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer focus:outline-none",
+            title: "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062E\u0631\u0648\u062C (Log out)",
+            "aria-label": "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062E\u0631\u0648\u062C",
+            id: "quick-logout-btn",
+            children: /* @__PURE__ */ jsx2(LogOut, { className: "w-4 h-4" })
+          }
+        ),
         /* @__PURE__ */ jsx2(
           "button",
           {
-            onClick: () => onTabChange("transfer"),
-            className: `px-3 py-1.5 rounded-md transition-all ${currentTab === "transfer" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
-            id: "nav-tab-transfer",
-            children: "Transfer"
-          }
-        ),
-        /* @__PURE__ */ jsxs2(
-          "button",
-          {
-            onClick: () => onTabChange("history"),
-            className: `px-3 py-1.5 rounded-md transition-all flex items-center gap-1 ${currentTab === "history" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
-            id: "nav-tab-history",
-            children: [
-              /* @__PURE__ */ jsx2(History, { className: "w-3.5 h-3.5" }),
-              /* @__PURE__ */ jsx2("span", { children: "History" })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs2(
-          "button",
-          {
-            onClick: () => onTabChange("privacy"),
-            className: `hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-md transition-all ${currentTab === "privacy" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
-            id: "nav-tab-privacy",
-            children: [
-              /* @__PURE__ */ jsx2(ShieldCheck, { className: "w-3.5 h-3.5" }),
-              /* @__PURE__ */ jsx2("span", { children: "Privacy" })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxs2(
-          "button",
-          {
-            onClick: () => onTabChange("help"),
-            className: `hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-md transition-all ${currentTab === "help" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
-            id: "nav-tab-help",
-            children: [
-              /* @__PURE__ */ jsx2(HelpCircle, { className: "w-3.5 h-3.5" }),
-              /* @__PURE__ */ jsx2("span", { children: "Help" })
-            ]
-          }
-        ),
-        currentUser && /* @__PURE__ */ jsxs2(
-          "button",
-          {
-            onClick: () => onTabChange("profile"),
-            className: `flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "profile" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
-            id: "nav-tab-profile",
-            title: "\u0627\u0644\u062D\u0633\u0627\u0628 \u0627\u0644\u0634\u062E\u0635\u064A",
-            children: [
-              /* @__PURE__ */ jsx2(
-                UserAvatar,
-                {
-                  name: currentUser.name,
-                  avatarUrl: currentUser.avatarUrl,
-                  size: "xs"
-                }
-              ),
-              /* @__PURE__ */ jsx2("span", { className: "max-w-[80px] sm:max-w-[110px] truncate", children: currentUser.name || "\u062D\u0633\u0627\u0628\u064A" })
-            ]
+            type: "button",
+            onClick: onToggleTheme,
+            className: "p-2 rounded-lg text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+            "aria-label": theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+            title: theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+            id: "theme-toggle-btn",
+            children: theme === "dark" ? /* @__PURE__ */ jsx2(Sun, { className: "w-4 h-4 text-amber-400" }) : /* @__PURE__ */ jsx2(Moon, { className: "w-4 h-4 text-zinc-700" })
           }
         )
-      ] }),
-      currentUser && onLogout && /* @__PURE__ */ jsx2(
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx2("div", { className: "sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 py-1.5 px-3 pb-safe shadow-lg transition-colors", children: /* @__PURE__ */ jsxs2("div", { className: "flex items-center justify-around max-w-md mx-auto", children: [
+      /* @__PURE__ */ jsxs2(
         "button",
         {
           type: "button",
-          onClick: onLogout,
-          className: "p-2 rounded-lg text-zinc-500 hover:text-rose-600 dark:text-zinc-400 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer focus:outline-none",
-          title: "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062E\u0631\u0648\u062C (Log out)",
-          "aria-label": "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062E\u0631\u0648\u062C",
-          id: "quick-logout-btn",
-          children: /* @__PURE__ */ jsx2(LogOut, { className: "w-4 h-4" })
-        }
-      ),
-      /* @__PURE__ */ jsx2(
-        "button",
-        {
-          type: "button",
-          onClick: onToggleTheme,
-          className: "p-2 rounded-lg text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
-          "aria-label": theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
-          title: theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
-          id: "theme-toggle-btn",
-          children: theme === "dark" ? /* @__PURE__ */ jsx2(Sun, { className: "w-4 h-4 text-amber-400" }) : /* @__PURE__ */ jsx2(Moon, { className: "w-4 h-4 text-zinc-700" })
-        }
-      ),
-      hasActiveSession && onEndSession && /* @__PURE__ */ jsxs2(
-        "button",
-        {
-          onClick: onEndSession,
-          className: "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 transition-colors",
-          id: "end-session-btn",
+          onClick: () => onTabChange("transfer"),
+          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "transfer" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
+          id: "mobile-nav-transfer",
           children: [
-            /* @__PURE__ */ jsx2(XCircle, { className: "w-3.5 h-3.5" }),
-            /* @__PURE__ */ jsx2("span", { children: "End" })
+            /* @__PURE__ */ jsx2(ArrowLeftRight, { className: `w-5 h-5 ${currentTab === "transfer" ? "stroke-[2.5]" : ""}` }),
+            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u0646\u0642\u0644" })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxs2(
+        "button",
+        {
+          type: "button",
+          onClick: () => onTabChange("history"),
+          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "history" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
+          id: "mobile-nav-history",
+          children: [
+            /* @__PURE__ */ jsx2(History, { className: `w-5 h-5 ${currentTab === "history" ? "stroke-[2.5]" : ""}` }),
+            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u0627\u0644\u0633\u062C\u0644" })
+          ]
+        }
+      ),
+      /* @__PURE__ */ jsxs2(
+        "button",
+        {
+          type: "button",
+          onClick: () => onTabChange("help"),
+          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "help" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
+          id: "mobile-nav-help",
+          children: [
+            /* @__PURE__ */ jsx2(HelpCircle, { className: `w-5 h-5 ${currentTab === "help" ? "stroke-[2.5]" : ""}` }),
+            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u0645\u0633\u0627\u0639\u062F\u0629" })
+          ]
+        }
+      ),
+      currentUser ? /* @__PURE__ */ jsxs2(
+        "button",
+        {
+          type: "button",
+          onClick: () => onTabChange("profile"),
+          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "profile" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
+          id: "mobile-nav-profile",
+          children: [
+            /* @__PURE__ */ jsx2(
+              UserAvatar,
+              {
+                name: currentUser.name,
+                avatarUrl: currentUser.avatarUrl,
+                size: "xs",
+                className: currentTab === "profile" ? "ring-2 ring-blue-500" : ""
+              }
+            ),
+            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5 max-w-[65px] truncate", children: currentUser.name || "\u062D\u0633\u0627\u0628\u064A" })
+          ]
+        }
+      ) : /* @__PURE__ */ jsxs2(
+        "button",
+        {
+          type: "button",
+          onClick: () => onTabChange("profile"),
+          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "profile" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
+          id: "mobile-nav-login",
+          children: [
+            /* @__PURE__ */ jsx2(User, { className: `w-5 h-5 ${currentTab === "profile" ? "stroke-[2.5]" : ""}` }),
+            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u062F\u062E\u0648\u0644" })
           ]
         }
       )
-    ] })
-  ] }) });
+    ] }) })
+  ] });
 };
 
 // src/components/LandingView.tsx
@@ -319,7 +397,7 @@ import {
   FileCheck2,
   Lock
 } from "lucide-react";
-import { Fragment, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 var LandingView = ({
   onStartSession,
   onOpenJoin,
@@ -345,10 +423,10 @@ var LandingView = ({
             disabled: isCreating,
             className: "w-full sm:w-auto px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group focus:outline-none",
             id: "start-transfer-btn",
-            children: isCreating ? /* @__PURE__ */ jsxs3(Fragment, { children: [
+            children: isCreating ? /* @__PURE__ */ jsxs3(Fragment2, { children: [
               /* @__PURE__ */ jsx3("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }),
               /* @__PURE__ */ jsx3("span", { children: "Creating Session..." })
-            ] }) : /* @__PURE__ */ jsxs3(Fragment, { children: [
+            ] }) : /* @__PURE__ */ jsxs3(Fragment2, { children: [
               /* @__PURE__ */ jsx3("span", { children: "Start New Transfer" }),
               /* @__PURE__ */ jsx3(ArrowRight, { className: "w-4 h-4 group-hover:translate-x-0.5 transition-transform" })
             ] })
@@ -431,7 +509,7 @@ import {
   Clock as Clock2,
   Share2 as Share22
 } from "lucide-react";
-import { Fragment as Fragment2, jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
+import { Fragment as Fragment3, jsx as jsx4, jsxs as jsxs4 } from "react/jsx-runtime";
 var PairingCard = ({
   session,
   onRefresh,
@@ -501,13 +579,13 @@ var PairingCard = ({
     } catch {
     }
   };
-  return /* @__PURE__ */ jsxs4("div", { className: "max-w-md mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6", children: [
+  return /* @__PURE__ */ jsxs4("div", { className: "max-w-md mx-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 sm:p-8 shadow-sm space-y-5 sm:space-y-6", children: [
     /* @__PURE__ */ jsxs4("div", { className: "text-center space-y-1", children: [
-      /* @__PURE__ */ jsx4("h2", { className: "text-xl font-bold text-zinc-900 dark:text-zinc-100", children: "Connect another device" }),
+      /* @__PURE__ */ jsx4("h2", { className: "text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100", children: "Connect another device" }),
       /* @__PURE__ */ jsx4("p", { className: "text-xs text-zinc-500 dark:text-zinc-400", children: "Scan with your phone camera or use the 8-character code" })
     ] }),
     /* @__PURE__ */ jsxs4("div", { className: "flex flex-col items-center justify-center", children: [
-      /* @__PURE__ */ jsx4("div", { className: "p-3 bg-white rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-inner", children: /* @__PURE__ */ jsx4("canvas", { ref: canvasRef, className: "rounded-lg" }) }),
+      /* @__PURE__ */ jsx4("div", { className: "p-2 sm:p-3 bg-white rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-inner max-w-full overflow-hidden", children: /* @__PURE__ */ jsx4("canvas", { ref: canvasRef, className: "rounded-lg max-w-full h-auto block" }) }),
       /* @__PURE__ */ jsxs4("div", { className: "mt-3 flex items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400", children: [
         /* @__PURE__ */ jsx4(Clock2, { className: "w-3.5 h-3.5" }),
         /* @__PURE__ */ jsxs4("span", { children: [
@@ -526,10 +604,10 @@ var PairingCard = ({
             onClick: handleCopyCode,
             className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 transition-colors focus:outline-none",
             id: "copy-pairing-code-btn",
-            children: copiedCode ? /* @__PURE__ */ jsxs4(Fragment2, { children: [
+            children: copiedCode ? /* @__PURE__ */ jsxs4(Fragment3, { children: [
               /* @__PURE__ */ jsx4(Check, { className: "w-3.5 h-3.5 text-emerald-500" }),
               /* @__PURE__ */ jsx4("span", { children: "Copied" })
-            ] }) : /* @__PURE__ */ jsxs4(Fragment2, { children: [
+            ] }) : /* @__PURE__ */ jsxs4(Fragment3, { children: [
               /* @__PURE__ */ jsx4(Copy, { className: "w-3.5 h-3.5" }),
               /* @__PURE__ */ jsx4("span", { children: "Copy" })
             ] })
@@ -544,10 +622,10 @@ var PairingCard = ({
           onClick: handleCopyLink,
           className: "flex-1 flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-750 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 transition-colors focus:outline-none",
           id: "copy-link-btn",
-          children: copiedLink ? /* @__PURE__ */ jsxs4(Fragment2, { children: [
+          children: copiedLink ? /* @__PURE__ */ jsxs4(Fragment3, { children: [
             /* @__PURE__ */ jsx4(Check, { className: "w-3.5 h-3.5 text-emerald-500" }),
             /* @__PURE__ */ jsx4("span", { children: "Link Copied" })
-          ] }) : /* @__PURE__ */ jsxs4(Fragment2, { children: [
+          ] }) : /* @__PURE__ */ jsxs4(Fragment3, { children: [
             /* @__PURE__ */ jsx4(Share22, { className: "w-3.5 h-3.5 text-zinc-500" }),
             /* @__PURE__ */ jsx4("span", { children: "Copy Direct Link" })
           ] })
@@ -786,7 +864,7 @@ var QrScannerModal = ({
 // src/components/ManualJoinModal.tsx
 import { useState as useState4 } from "react";
 import { KeyRound as KeyRound2, X as X3, Camera as Camera2, ArrowRight as ArrowRight2, AlertCircle as AlertCircle2 } from "lucide-react";
-import { Fragment as Fragment3, jsx as jsx6, jsxs as jsxs6 } from "react/jsx-runtime";
+import { Fragment as Fragment4, jsx as jsx6, jsxs as jsxs6 } from "react/jsx-runtime";
 var ManualJoinModal = ({
   isOpen,
   onClose,
@@ -860,10 +938,10 @@ var ManualJoinModal = ({
             disabled: !inputValue.trim() || isSubmitting,
             className: "w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed",
             id: "submit-manual-code-btn",
-            children: isSubmitting ? /* @__PURE__ */ jsxs6(Fragment3, { children: [
+            children: isSubmitting ? /* @__PURE__ */ jsxs6(Fragment4, { children: [
               /* @__PURE__ */ jsx6("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }),
               /* @__PURE__ */ jsx6("span", { children: "Connecting..." })
-            ] }) : /* @__PURE__ */ jsxs6(Fragment3, { children: [
+            ] }) : /* @__PURE__ */ jsxs6(Fragment4, { children: [
               /* @__PURE__ */ jsx6("span", { children: "Connect to Device" }),
               /* @__PURE__ */ jsx6(ArrowRight2, { className: "w-4 h-4" })
             ] })
@@ -988,7 +1066,7 @@ function isValidUrl(text) {
 }
 
 // src/components/TransferDashboard.tsx
-import { Fragment as Fragment4, jsx as jsx7, jsxs as jsxs7 } from "react/jsx-runtime";
+import { Fragment as Fragment5, jsx as jsx7, jsxs as jsxs7 } from "react/jsx-runtime";
 var TransferDashboard = ({
   localDeviceInfo,
   peerDeviceInfo,
@@ -1161,15 +1239,15 @@ var TransferDashboard = ({
         " via WebRTC"
       ] })
     ] }),
-    /* @__PURE__ */ jsxs7("div", { className: "p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4", children: [
-      /* @__PURE__ */ jsxs7("div", { className: "flex items-center gap-3", children: [
-        /* @__PURE__ */ jsx7("div", { className: "w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20", children: peerDeviceInfo?.type === "mobile" ? /* @__PURE__ */ jsx7(Smartphone3, { className: "w-5 h-5" }) : /* @__PURE__ */ jsx7(Laptop2, { className: "w-5 h-5" }) }),
-        /* @__PURE__ */ jsxs7("div", { children: [
-          /* @__PURE__ */ jsxs7("div", { className: "flex items-center gap-2", children: [
+    /* @__PURE__ */ jsxs7("div", { className: "p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4", children: [
+      /* @__PURE__ */ jsxs7("div", { className: "flex items-center gap-2.5 sm:gap-3 min-w-0", children: [
+        /* @__PURE__ */ jsx7("div", { className: "w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20 shrink-0", children: peerDeviceInfo?.type === "mobile" ? /* @__PURE__ */ jsx7(Smartphone3, { className: "w-4 h-4 sm:w-5 sm:h-5" }) : /* @__PURE__ */ jsx7(Laptop2, { className: "w-4 h-4 sm:w-5 sm:h-5" }) }),
+        /* @__PURE__ */ jsxs7("div", { className: "min-w-0", children: [
+          /* @__PURE__ */ jsxs7("div", { className: "flex items-center gap-1.5", children: [
             /* @__PURE__ */ jsx7("span", { className: "text-xs text-zinc-500 dark:text-zinc-400", children: "\u0645\u062A\u0635\u0644 \u0628\u0640" }),
             /* @__PURE__ */ jsx7("span", { className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" })
           ] }),
-          /* @__PURE__ */ jsx7("h2", { className: "text-base font-bold text-zinc-900 dark:text-zinc-100", children: peerDeviceInfo?.name || "\u0627\u0644\u062C\u0647\u0627\u0632 \u0627\u0644\u0645\u0642\u062A\u0631\u0646 (Connected Peer)" })
+          /* @__PURE__ */ jsx7("h2", { className: "text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-[200px] sm:max-w-xs", children: peerDeviceInfo?.name || "\u0627\u0644\u062C\u0647\u0627\u0632 \u0627\u0644\u0645\u0642\u062A\u0631\u0646" })
         ] })
       ] }),
       /* @__PURE__ */ jsxs7("label", { className: "flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400 cursor-pointer select-none", children: [
@@ -1300,9 +1378,9 @@ var TransferDashboard = ({
         "div",
         {
           onClick: () => fileInputRef.current?.click(),
-          className: "group relative border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-3xl p-8 sm:p-12 text-center bg-white dark:bg-zinc-900/60 hover:bg-blue-50/20 dark:hover:bg-blue-950/20 transition-all cursor-pointer shadow-2xs",
+          className: "group relative border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-2xl sm:rounded-3xl p-5 sm:p-12 text-center bg-white dark:bg-zinc-900/60 hover:bg-blue-50/20 dark:hover:bg-blue-950/20 transition-all cursor-pointer shadow-2xs",
           children: /* @__PURE__ */ jsxs7("div", { className: "max-w-md mx-auto space-y-4", children: [
-            /* @__PURE__ */ jsx7("div", { className: "w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center border border-blue-100 dark:border-blue-900/60 group-hover:scale-105 transition-transform", children: /* @__PURE__ */ jsx7(UploadCloud, { className: "w-8 h-8" }) }),
+            /* @__PURE__ */ jsx7("div", { className: "w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center border border-blue-100 dark:border-blue-900/60 group-hover:scale-105 transition-transform", children: /* @__PURE__ */ jsx7(UploadCloud, { className: "w-7 h-7 sm:w-8 sm:h-8" }) }),
             /* @__PURE__ */ jsxs7("div", { children: [
               /* @__PURE__ */ jsx7("h3", { className: "text-base font-bold text-zinc-900 dark:text-zinc-100", children: isMobile ? "\u0627\u0636\u063A\u0637 \u0644\u0627\u062E\u062A\u064A\u0627\u0631 \u0627\u0644\u0635\u0648\u0631 \u0648\u0627\u0644\u0645\u0644\u0641\u0627\u062A" : "\u0627\u0636\u063A\u0637 \u0644\u0627\u062E\u062A\u064A\u0627\u0631 \u0627\u0644\u0645\u0644\u0641\u0627\u062A \u0623\u0648 \u0627\u0633\u062D\u0628\u0647\u0627 \u0647\u0646\u0627" }),
               /* @__PURE__ */ jsx7("p", { className: "text-xs text-zinc-500 dark:text-zinc-400 mt-1", children: "\u0625\u0631\u0633\u0627\u0644 \u0645\u0628\u0627\u0634\u0631 \u0648\u0645\u0634\u0641\u0631 P2P \u0639\u0628\u0631 WebRTC \u0628\u0633\u0631\u0639\u0629 \u0627\u0644\u0634\u0628\u0643\u0629 \u0627\u0644\u0645\u062D\u0644\u064A\u0629 \u0627\u0644\u0643\u0627\u0645\u0644\u0629" })
@@ -1312,7 +1390,7 @@ var TransferDashboard = ({
                 "button",
                 {
                   onClick: () => fileInputRef.current?.click(),
-                  className: "px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-sm transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer",
+                  className: "flex-1 sm:flex-initial min-w-[120px] px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs shadow-sm transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer",
                   id: "select-files-btn",
                   children: [
                     /* @__PURE__ */ jsx7(File, { className: "w-3.5 h-3.5" }),
@@ -1324,7 +1402,7 @@ var TransferDashboard = ({
                 "button",
                 {
                   onClick: () => imageInputRef.current?.click(),
-                  className: "px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer",
+                  className: "flex-1 sm:flex-initial min-w-[120px] px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer",
                   id: "select-images-btn",
                   children: [
                     /* @__PURE__ */ jsx7(ImageIcon, { className: "w-3.5 h-3.5 text-blue-500" }),
@@ -1336,7 +1414,7 @@ var TransferDashboard = ({
                 "button",
                 {
                   onClick: () => folderInputRef.current?.click(),
-                  className: "px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer",
+                  className: "flex-1 sm:flex-initial min-w-[120px] px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-medium text-xs border border-zinc-200 dark:border-zinc-700 transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer",
                   id: "select-folder-btn",
                   children: [
                     /* @__PURE__ */ jsx7(FolderUp, { className: "w-3.5 h-3.5 text-amber-500" }),
@@ -1348,7 +1426,7 @@ var TransferDashboard = ({
                 "button",
                 {
                   onClick: () => cloudFileInputRef.current?.click(),
-                  className: "px-3.5 py-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-medium text-xs border border-purple-200 dark:border-purple-800 transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer",
+                  className: "w-full sm:w-auto px-3.5 py-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 dark:hover:bg-purple-900/60 text-purple-700 dark:text-purple-300 font-medium text-xs border border-purple-200 dark:border-purple-800 transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer",
                   title: "\u0631\u0641\u0639 \u0648\u062A\u0645\u0631\u064A\u0631 \u0627\u0644\u0645\u0644\u0641 \u0639\u0628\u0631 Supabase Storage \u0643\u0628\u062F\u064A\u0644 \u0625\u0630\u0627 \u062A\u0639\u0630\u0631 P2P",
                   children: [
                     /* @__PURE__ */ jsx7(CloudUpload, { className: "w-3.5 h-3.5 text-purple-500" }),
@@ -1448,7 +1526,7 @@ var TransferDashboard = ({
                     ] }),
                     /* @__PURE__ */ jsxs7("div", { className: "text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-2", children: [
                       /* @__PURE__ */ jsx7("span", { children: formatBytes(item.size) }),
-                      item.state === "transferring" && /* @__PURE__ */ jsxs7(Fragment4, { children: [
+                      item.state === "transferring" && /* @__PURE__ */ jsxs7(Fragment5, { children: [
                         /* @__PURE__ */ jsx7("span", { children: "\u2022" }),
                         /* @__PURE__ */ jsx7("span", { className: "text-blue-600 dark:text-blue-400 font-medium", children: formatSpeed(item.speed) }),
                         /* @__PURE__ */ jsx7("span", { children: "\u2022" }),
@@ -1614,10 +1692,10 @@ var TransferDashboard = ({
                   {
                     onClick: () => handleCopyText(item.id, item.text),
                     className: "px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-xs font-medium flex items-center gap-1 transition-colors cursor-pointer",
-                    children: copiedTextId === item.id ? /* @__PURE__ */ jsxs7(Fragment4, { children: [
+                    children: copiedTextId === item.id ? /* @__PURE__ */ jsxs7(Fragment5, { children: [
                       /* @__PURE__ */ jsx7(Check2, { className: "w-3 h-3 text-emerald-500" }),
                       /* @__PURE__ */ jsx7("span", { children: "\u062A\u0645 \u0627\u0644\u0646\u0633\u062E" })
-                    ] }) : /* @__PURE__ */ jsxs7(Fragment4, { children: [
+                    ] }) : /* @__PURE__ */ jsxs7(Fragment5, { children: [
                       /* @__PURE__ */ jsx7(Copy2, { className: "w-3 h-3" }),
                       /* @__PURE__ */ jsx7("span", { children: "\u0646\u0633\u062E" })
                     ] })
@@ -1645,7 +1723,7 @@ import {
   Download as Download2,
   File as File2
 } from "lucide-react";
-import { Fragment as Fragment5, jsx as jsx8, jsxs as jsxs8 } from "react/jsx-runtime";
+import { Fragment as Fragment6, jsx as jsx8, jsxs as jsxs8 } from "react/jsx-runtime";
 var HistoryView = ({
   files,
   onClearHistory
@@ -1692,11 +1770,11 @@ var HistoryView = ({
           ] }),
           /* @__PURE__ */ jsxs8("div", { className: "text-xs text-zinc-500 dark:text-zinc-400 flex flex-wrap items-center gap-2 mt-0.5", children: [
             /* @__PURE__ */ jsx8("span", { children: formatBytes(item.size) }),
-            item.endTime && /* @__PURE__ */ jsxs8(Fragment5, { children: [
+            item.endTime && /* @__PURE__ */ jsxs8(Fragment6, { children: [
               /* @__PURE__ */ jsx8("span", { children: "\u2022" }),
               /* @__PURE__ */ jsx8("span", { children: new Date(item.endTime).toLocaleTimeString() })
             ] }),
-            item.sha256 && /* @__PURE__ */ jsxs8(Fragment5, { children: [
+            item.sha256 && /* @__PURE__ */ jsxs8(Fragment6, { children: [
               /* @__PURE__ */ jsx8("span", { children: "\u2022" }),
               /* @__PURE__ */ jsxs8("span", { className: "font-mono text-[10px] text-zinc-400 truncate max-w-[140px] sm:max-w-xs", children: [
                 "SHA-256: ",
@@ -3063,7 +3141,7 @@ create policy "Avatar auth delete"
 `;
 
 // src/components/AuthView.tsx
-import { Fragment as Fragment6, jsx as jsx11, jsxs as jsxs11 } from "react/jsx-runtime";
+import { Fragment as Fragment7, jsx as jsx11, jsxs as jsxs11 } from "react/jsx-runtime";
 var AuthView = ({ onAuthSuccess }) => {
   const [mode, setMode] = useState6("login");
   const [email, setEmail] = useState6("");
@@ -3400,7 +3478,7 @@ var AuthView = ({ onAuthSuccess }) => {
     }
   };
   const passwordStrength = evaluatePasswordStrength(password);
-  return /* @__PURE__ */ jsx11("div", { className: "w-full max-w-md mx-auto p-4", children: /* @__PURE__ */ jsxs11("div", { className: "bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6", children: [
+  return /* @__PURE__ */ jsx11("div", { className: "w-full max-w-md mx-auto px-2 sm:px-4 py-4", children: /* @__PURE__ */ jsxs11("div", { className: "bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl space-y-5 sm:space-y-6", children: [
     /* @__PURE__ */ jsxs11("div", { className: "text-center space-y-2", children: [
       /* @__PURE__ */ jsx11("div", { className: "w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center mx-auto shadow-md", children: /* @__PURE__ */ jsx11(Lock3, { className: "w-6 h-6" }) }),
       /* @__PURE__ */ jsxs11("h2", { className: "text-xl sm:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100", children: [
@@ -3414,17 +3492,17 @@ var AuthView = ({ onAuthSuccess }) => {
         mode === "verify" && "\u0623\u062F\u062E\u0644 \u0631\u0645\u0632 \u0627\u0644\u0623\u0645\u0627\u0646 \u0627\u0644\u0633\u0631\u064A \u0627\u0644\u0645\u0631\u0633\u0644 \u0625\u0644\u0649 \u0628\u0631\u064A\u062F\u0643 \u0644\u062A\u0641\u0639\u064A\u0644 \u0627\u0644\u062D\u0633\u0627\u0628"
       ] })
     ] }),
-    /* @__PURE__ */ jsxs11("div", { className: "flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs", children: [
-      /* @__PURE__ */ jsxs11("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsx11("span", { className: "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" }),
-        /* @__PURE__ */ jsx11("span", { className: "font-bold text-emerald-800 dark:text-emerald-300", children: "\u26A1 \u0627\u0644\u0646\u0638\u0627\u0645 \u064A\u0639\u0645\u0644 \u0630\u0627\u062A\u064A\u0627\u064B 100% \u0628\u062F\u0648\u0646 \u0623\u064A \u0625\u0639\u062F\u0627\u062F\u0627\u062A \u0623\u0648 \u0627\u0646\u062A\u0638\u0627\u0631" })
+    /* @__PURE__ */ jsxs11("div", { className: "flex items-center justify-between px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs", children: [
+      /* @__PURE__ */ jsxs11("div", { className: "flex items-center gap-1.5 sm:gap-2", children: [
+        /* @__PURE__ */ jsx11("span", { className: "w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" }),
+        /* @__PURE__ */ jsx11("span", { className: "font-bold text-emerald-800 dark:text-emerald-300 text-[11px] sm:text-xs", children: "\u26A1 \u062C\u0627\u0647\u0632 \u0644\u0644\u0639\u0645\u0644 \u0627\u0644\u0645\u0628\u0627\u0634\u0631" })
       ] }),
       /* @__PURE__ */ jsx11(
         "button",
         {
           type: "button",
           onClick: () => setShowSupabaseModal(true),
-          className: "text-[11px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 underline cursor-pointer",
+          className: "text-[11px] text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 underline cursor-pointer shrink-0",
           title: "\u0625\u0639\u062F\u0627\u062F\u0627\u062A \u0645\u062A\u0642\u062F\u0645\u0629 \u0627\u062E\u062A\u064A\u0627\u0631\u064A\u0629 \u0644\u0644\u0645\u0637\u0648\u0631\u064A\u0646",
           children: "\u2699\uFE0F \u0625\u0639\u062F\u0627\u062F\u0627\u062A"
         }
@@ -3436,11 +3514,11 @@ var AuthView = ({ onAuthSuccess }) => {
         type: "button",
         onClick: () => onAuthSuccess(quickGuestLogin()),
         id: "instant-auto-login-btn",
-        className: "w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-sm flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-600/25 active:scale-[0.99] transition-all cursor-pointer border border-emerald-400/30",
+        className: "w-full py-3 px-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 active:scale-[0.99] transition-all cursor-pointer border border-emerald-400/30",
         children: [
-          /* @__PURE__ */ jsx11(Sparkles, { className: "w-4 h-4 text-emerald-200 animate-bounce" }),
-          /* @__PURE__ */ jsx11("span", { children: "\u26A1 \u062F\u062E\u0648\u0644 \u0641\u0648\u0631\u064A \u0645\u0628\u0627\u0634\u0631 (\u062A\u0634\u063A\u064A\u0644 \u062A\u0644\u0642\u0627\u0626\u064A \u0628\u062F\u0648\u0646 \u0625\u062F\u062E\u0627\u0644 \u0628\u064A\u0627\u0646\u0627\u062A)" }),
-          /* @__PURE__ */ jsx11(ArrowRight3, { className: "w-4 h-4" })
+          /* @__PURE__ */ jsx11(Sparkles, { className: "w-4 h-4 text-emerald-200 animate-bounce shrink-0" }),
+          /* @__PURE__ */ jsx11("span", { children: "\u26A1 \u062F\u062E\u0648\u0644 \u0641\u0648\u0631\u064A \u0645\u0628\u0627\u0634\u0631 (\u0628\u062F\u0648\u0646 \u062A\u0633\u062C\u064A\u0644)" }),
+          /* @__PURE__ */ jsx11(ArrowRight3, { className: "w-4 h-4 shrink-0" })
         ]
       }
     ),
@@ -3482,15 +3560,15 @@ var AuthView = ({ onAuthSuccess }) => {
           onClick: handleGoogleAuthClick,
           disabled: loading,
           id: "google-signin-btn",
-          className: "w-full py-2.5 px-4 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-750 active:scale-[0.99] text-zinc-800 dark:text-zinc-100 font-medium text-sm flex items-center justify-center gap-3 shadow-xs hover:shadow transition-all cursor-pointer disabled:opacity-60",
+          className: "w-full py-2.5 px-4 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-750 active:scale-[0.99] text-zinc-800 dark:text-zinc-100 font-medium text-xs sm:text-sm flex items-center justify-center gap-2.5 shadow-xs hover:shadow transition-all cursor-pointer disabled:opacity-60",
           children: [
-            /* @__PURE__ */ jsxs11("svg", { className: "w-5 h-5 shrink-0", viewBox: "0 0 24 24", children: [
+            /* @__PURE__ */ jsxs11("svg", { className: "w-4 h-4 sm:w-5 sm:h-5 shrink-0", viewBox: "0 0 24 24", children: [
               /* @__PURE__ */ jsx11("path", { fill: "#4285F4", d: "M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z" }),
               /* @__PURE__ */ jsx11("path", { fill: "#34A853", d: "M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z" }),
               /* @__PURE__ */ jsx11("path", { fill: "#FBBC05", d: "M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z" }),
               /* @__PURE__ */ jsx11("path", { fill: "#EA4335", d: "M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" })
             ] }),
-            /* @__PURE__ */ jsx11("span", { children: "\u0627\u0644\u0645\u062A\u0627\u0628\u0639\u0629 \u0628\u0627\u0633\u062A\u062E\u062F\u0627\u0645 Google (Google Auth)" })
+            /* @__PURE__ */ jsx11("span", { children: "\u0627\u0644\u0645\u062A\u0627\u0628\u0639\u0629 \u0628\u0627\u0633\u062A\u062E\u062F\u0627\u0645 Google" })
           ]
         }
       ),
@@ -3555,7 +3633,7 @@ var AuthView = ({ onAuthSuccess }) => {
           disabled: loading,
           className: "w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 disabled:opacity-60 transition-all cursor-pointer",
           id: "login-submit-btn",
-          children: loading ? /* @__PURE__ */ jsx11("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs11(Fragment6, { children: [
+          children: loading ? /* @__PURE__ */ jsx11("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs11(Fragment7, { children: [
             /* @__PURE__ */ jsx11("span", { children: "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644" }),
             /* @__PURE__ */ jsx11(ArrowRight3, { className: "w-4 h-4" })
           ] })
@@ -3622,7 +3700,7 @@ var AuthView = ({ onAuthSuccess }) => {
               children: avatarFile ? "\u062A\u063A\u064A\u064A\u0631 \u0627\u0644\u0635\u0648\u0631\u0629" : "\u0631\u0641\u0639 \u0635\u0648\u0631\u0629 \u0631\u0645\u0632\u064A\u0629 (\u0627\u062E\u062A\u064A\u0627\u0631\u064A)"
             }
           ),
-          avatarFile && /* @__PURE__ */ jsxs11(Fragment6, { children: [
+          avatarFile && /* @__PURE__ */ jsxs11(Fragment7, { children: [
             /* @__PURE__ */ jsx11("span", { className: "text-zinc-400", children: "\u2022" }),
             /* @__PURE__ */ jsx11(
               "button",
@@ -3767,7 +3845,7 @@ var AuthView = ({ onAuthSuccess }) => {
           disabled: loading,
           className: "w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 disabled:opacity-60 transition-all cursor-pointer",
           id: "signup-submit-btn",
-          children: loading ? /* @__PURE__ */ jsx11("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs11(Fragment6, { children: [
+          children: loading ? /* @__PURE__ */ jsx11("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs11(Fragment7, { children: [
             /* @__PURE__ */ jsx11("span", { children: "\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u062D\u0633\u0627\u0628 \u0648\u062A\u0641\u0639\u064A\u0644 \u0627\u0644\u0623\u0645\u0627\u0646" }),
             /* @__PURE__ */ jsx11(ArrowRight3, { className: "w-4 h-4" })
           ] })
@@ -3854,7 +3932,7 @@ var AuthView = ({ onAuthSuccess }) => {
           type: "submit",
           disabled: loading,
           className: "w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-600/20 disabled:opacity-60 transition-all cursor-pointer",
-          children: loading ? /* @__PURE__ */ jsx11("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs11(Fragment6, { children: [
+          children: loading ? /* @__PURE__ */ jsx11("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs11(Fragment7, { children: [
             /* @__PURE__ */ jsx11("span", { children: "\u062A\u0623\u0643\u064A\u062F \u0627\u0644\u0631\u0645\u0632 \u0648\u0627\u0644\u062F\u062E\u0648\u0644" }),
             /* @__PURE__ */ jsx11(ArrowRight3, { className: "w-4 h-4" })
           ] })
@@ -4044,10 +4122,10 @@ var AuthView = ({ onAuthSuccess }) => {
             type: "button",
             onClick: handleCopySql,
             className: "px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer transition-colors",
-            children: copiedSql ? /* @__PURE__ */ jsxs11(Fragment6, { children: [
+            children: copiedSql ? /* @__PURE__ */ jsxs11(Fragment7, { children: [
               /* @__PURE__ */ jsx11(Check3, { className: "w-4 h-4 text-emerald-400" }),
               /* @__PURE__ */ jsx11("span", { children: "\u062A\u0645 \u0627\u0644\u0646\u0633\u062E \u0628\u0646\u062C\u0627\u062D!" })
-            ] }) : /* @__PURE__ */ jsxs11(Fragment6, { children: [
+            ] }) : /* @__PURE__ */ jsxs11(Fragment7, { children: [
               /* @__PURE__ */ jsx11(Copy3, { className: "w-4 h-4" }),
               /* @__PURE__ */ jsx11("span", { children: "\u0646\u0633\u062E \u0643\u0648\u062F \u0627\u0644\u0640 SQL \u0628\u0627\u0644\u0643\u0627\u0645\u0644" })
             ] })
@@ -4079,7 +4157,7 @@ import {
   Check as Check4,
   Sparkles as Sparkles2
 } from "lucide-react";
-import { Fragment as Fragment7, jsx as jsx12, jsxs as jsxs12 } from "react/jsx-runtime";
+import { Fragment as Fragment8, jsx as jsx12, jsxs as jsxs12 } from "react/jsx-runtime";
 var ProfileView = ({
   user,
   onUpdateUser,
@@ -4215,22 +4293,22 @@ var ProfileView = ({
     } catch {
     }
   };
-  return /* @__PURE__ */ jsxs12("div", { className: "max-w-3xl mx-auto px-4 py-8 space-y-6", children: [
+  return /* @__PURE__ */ jsxs12("div", { className: "max-w-3xl mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-5 sm:space-y-6", children: [
     /* @__PURE__ */ jsxs12("div", { className: "flex flex-col sm:flex-row sm:items-center justify-between gap-4", children: [
       /* @__PURE__ */ jsxs12("div", { children: [
-        /* @__PURE__ */ jsxs12("h2", { className: "text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2", children: [
-          /* @__PURE__ */ jsx12(User4, { className: "w-6 h-6 text-blue-600 dark:text-blue-400" }),
-          /* @__PURE__ */ jsx12("span", { children: "\u0625\u062F\u0627\u0631\u0629 \u0627\u0644\u062D\u0633\u0627\u0628 \u0627\u0644\u0634\u062E\u0635\u064A (Profile Settings)" })
+        /* @__PURE__ */ jsxs12("h2", { className: "text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2", children: [
+          /* @__PURE__ */ jsx12(User4, { className: "w-5 h-5 sm:w-6 sm:h-6 text-blue-600 dark:text-blue-400 shrink-0" }),
+          /* @__PURE__ */ jsx12("span", { className: "break-words", children: "\u0625\u062F\u0627\u0631\u0629 \u0627\u0644\u062D\u0633\u0627\u0628 \u0627\u0644\u0634\u062E\u0635\u064A (Profile Settings)" })
         ] }),
         /* @__PURE__ */ jsx12("p", { className: "text-xs text-zinc-500 dark:text-zinc-400 mt-1", children: "\u0628\u064A\u0627\u0646\u0627\u062A \u062D\u0633\u0627\u0628\u0643 \u0648\u0635\u0648\u0631\u062A\u0643 \u0627\u0644\u0631\u0645\u0632\u064A\u0629 \u0645\u062D\u0641\u0648\u0638\u0629 \u0641\u064A \u0642\u0627\u0639\u062F\u0629 \u0628\u064A\u0627\u0646\u0627\u062A Supabase \u0648\u0633\u0644\u0629 \u0627\u0644\u062A\u062E\u0632\u064A\u0646 \u0627\u0644\u0633\u062D\u0627\u0628\u064A." })
       ] }),
-      /* @__PURE__ */ jsxs12("div", { className: "flex items-center gap-2", children: [
+      /* @__PURE__ */ jsxs12("div", { className: "flex items-center gap-2 w-full sm:w-auto", children: [
         /* @__PURE__ */ jsxs12(
           "button",
           {
             type: "button",
             onClick: () => setShowSqlModal(true),
-            className: "inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-900 transition-colors cursor-pointer",
+            className: "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 dark:hover:bg-blue-900/60 border border-blue-200 dark:border-blue-900 transition-colors cursor-pointer",
             title: "\u0643\u0648\u062F SQL \u0644\u0625\u0646\u0634\u0627\u0621 \u062C\u062F\u0627\u0648\u0644 Supabase",
             children: [
               /* @__PURE__ */ jsx12(Code22, { className: "w-3.5 h-3.5" }),
@@ -4243,7 +4321,7 @@ var ProfileView = ({
           {
             type: "button",
             onClick: onLogout,
-            className: "inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200 dark:border-rose-900/50 transition-colors cursor-pointer",
+            className: "flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200 dark:border-rose-900/50 transition-colors cursor-pointer",
             id: "profile-logout-btn",
             children: [
               /* @__PURE__ */ jsx12(LogOut2, { className: "w-3.5 h-3.5" }),
@@ -4253,15 +4331,15 @@ var ProfileView = ({
         )
       ] })
     ] }),
-    errorMsg && /* @__PURE__ */ jsxs12("div", { className: "p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2.5", children: [
+    errorMsg && /* @__PURE__ */ jsxs12("div", { className: "p-3.5 sm:p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2.5", children: [
       /* @__PURE__ */ jsx12(AlertCircle6, { className: "w-4 h-4 shrink-0 mt-0.5" }),
       /* @__PURE__ */ jsx12("span", { className: "leading-relaxed", children: errorMsg })
     ] }),
-    successMsg && /* @__PURE__ */ jsxs12("div", { className: "p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900 text-xs text-emerald-700 dark:text-emerald-300 flex items-start gap-2.5", children: [
+    successMsg && /* @__PURE__ */ jsxs12("div", { className: "p-3.5 sm:p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900 text-xs text-emerald-700 dark:text-emerald-300 flex items-start gap-2.5", children: [
       /* @__PURE__ */ jsx12(CheckCircle3, { className: "w-4 h-4 shrink-0 mt-0.5" }),
       /* @__PURE__ */ jsx12("span", { className: "leading-relaxed", children: successMsg })
     ] }),
-    /* @__PURE__ */ jsxs12("div", { className: "p-6 sm:p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-8", children: [
+    /* @__PURE__ */ jsxs12("div", { className: "p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-6 sm:space-y-8", children: [
       /* @__PURE__ */ jsxs12("div", { className: "flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-zinc-100 dark:border-zinc-800", children: [
         /* @__PURE__ */ jsxs12("div", { className: "relative group cursor-pointer", onClick: () => fileInputRef.current?.click(), children: [
           /* @__PURE__ */ jsx12(
@@ -4297,14 +4375,14 @@ var ProfileView = ({
         /* @__PURE__ */ jsxs12("div", { className: "space-y-2 text-center sm:text-right", children: [
           /* @__PURE__ */ jsx12("h3", { className: "text-lg font-bold text-zinc-900 dark:text-zinc-100", children: name || user.name }),
           /* @__PURE__ */ jsx12("p", { className: "text-xs text-zinc-500 dark:text-zinc-400 font-mono", children: user.email }),
-          /* @__PURE__ */ jsxs12("div", { className: "flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1", children: [
+          /* @__PURE__ */ jsxs12("div", { className: "flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-2 pt-1 w-full", children: [
             /* @__PURE__ */ jsxs12(
               "button",
               {
                 type: "button",
                 onClick: () => fileInputRef.current?.click(),
                 disabled: uploadingAvatar,
-                className: "px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-colors cursor-pointer disabled:opacity-50",
+                className: "w-full sm:w-auto px-3.5 py-2 sm:py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition-colors cursor-pointer disabled:opacity-50",
                 children: [
                   /* @__PURE__ */ jsx12(UploadCloud3, { className: "w-3.5 h-3.5" }),
                   /* @__PURE__ */ jsx12("span", { children: uploadingAvatar ? "\u062C\u0627\u0631\u064A \u0627\u0644\u0631\u0641\u0639 \u0644\u0640 Storage..." : "\u0631\u0641\u0639 \u0635\u0648\u0631\u0629 \u062C\u062F\u064A\u062F\u0629 \u{1F4F8}" })
@@ -4316,7 +4394,7 @@ var ProfileView = ({
               {
                 type: "button",
                 onClick: handleResetToGeneratedAvatar,
-                className: "px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-750 text-zinc-700 dark:text-zinc-300 text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer",
+                className: "w-full sm:w-auto px-3.5 py-2 sm:py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-750 text-zinc-700 dark:text-zinc-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer",
                 children: [
                   /* @__PURE__ */ jsx12(Sparkles2, { className: "w-3.5 h-3.5 text-amber-500" }),
                   /* @__PURE__ */ jsx12("span", { children: "\u0635\u0648\u0631\u0629 \u0647\u0646\u062F\u0633\u064A\u0629 \u062A\u0644\u0642\u0627\u0626\u064A\u0629" })
@@ -4327,7 +4405,7 @@ var ProfileView = ({
         ] })
       ] }),
       /* @__PURE__ */ jsxs12("form", { onSubmit: handleSaveProfile, className: "space-y-5", children: [
-        /* @__PURE__ */ jsxs12("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-5", children: [
+        /* @__PURE__ */ jsxs12("div", { className: "grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5", children: [
           /* @__PURE__ */ jsxs12("div", { className: "space-y-1.5", children: [
             /* @__PURE__ */ jsx12("label", { className: "text-xs font-semibold text-zinc-700 dark:text-zinc-300 block", children: "\u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0638\u0627\u0647\u0631 (Display Name)" }),
             /* @__PURE__ */ jsxs12("div", { className: "relative", children: [
@@ -4339,7 +4417,7 @@ var ProfileView = ({
                   value: name,
                   onChange: (e) => setName(e.target.value),
                   placeholder: "\u0627\u0633\u0645\u0643 \u0627\u0644\u0643\u0627\u0645\u0644",
-                  className: "w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all",
+                  className: "w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all",
                   id: "profile-name-input"
                 }
               ),
@@ -4356,7 +4434,7 @@ var ProfileView = ({
                   value: deviceName,
                   onChange: (e) => setDeviceName(e.target.value),
                   placeholder: "\u0645\u062B\u0644: MacBook Pro \u0623\u0648 iPhone 15",
-                  className: "w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all",
+                  className: "w-full pl-3 pr-10 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all",
                   id: "profile-devicename-input"
                 }
               ),
@@ -4395,14 +4473,14 @@ var ProfileView = ({
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ jsx12("div", { className: "flex justify-end pt-2", children: /* @__PURE__ */ jsx12(
+        /* @__PURE__ */ jsx12("div", { className: "pt-2 flex justify-end", children: /* @__PURE__ */ jsx12(
           "button",
           {
             type: "submit",
             disabled: saving,
-            className: "px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition-all cursor-pointer flex items-center gap-2 disabled:opacity-50",
+            className: "w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-600/20 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50",
             id: "save-profile-btn",
-            children: saving ? /* @__PURE__ */ jsx12("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs12(Fragment7, { children: [
+            children: saving ? /* @__PURE__ */ jsx12("div", { className: "w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" }) : /* @__PURE__ */ jsxs12(Fragment8, { children: [
               /* @__PURE__ */ jsx12(Save, { className: "w-4 h-4" }),
               /* @__PURE__ */ jsx12("span", { children: "\u062D\u0641\u0638 \u0627\u0644\u062A\u0639\u062F\u064A\u0644\u0627\u062A \u0641\u064A Supabase" })
             ] })
@@ -4426,7 +4504,7 @@ var ProfileView = ({
                     value: newPassword,
                     onChange: (e) => setNewPassword(e.target.value),
                     placeholder: "8 \u062E\u0627\u0646\u0627\u062A \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644",
-                    className: "w-full pl-10 pr-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono",
+                    className: "w-full pl-10 pr-3 py-2.5 sm:py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono",
                     dir: "ltr"
                   }
                 ),
@@ -4435,7 +4513,7 @@ var ProfileView = ({
                   {
                     type: "button",
                     onClick: () => setShowPassword(!showPassword),
-                    className: "absolute left-3 top-2.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer",
+                    className: "absolute left-3 top-3 sm:top-2.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer",
                     children: showPassword ? /* @__PURE__ */ jsx12(EyeOff3, { className: "w-3.5 h-3.5" }) : /* @__PURE__ */ jsx12(Eye2, { className: "w-3.5 h-3.5" })
                   }
                 )
@@ -4450,7 +4528,7 @@ var ProfileView = ({
                   value: confirmNewPassword,
                   onChange: (e) => setConfirmNewPassword(e.target.value),
                   placeholder: "\u0623\u0639\u062F \u0625\u062F\u062E\u0627\u0644 \u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631",
-                  className: "w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono",
+                  className: "w-full px-3 py-2.5 sm:py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-base sm:text-xs text-zinc-900 dark:text-zinc-100 text-left font-mono",
                   dir: "ltr"
                 }
               )
@@ -4525,10 +4603,10 @@ var ProfileView = ({
             type: "button",
             onClick: handleCopySql,
             className: "px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-md cursor-pointer transition-colors",
-            children: copiedSql ? /* @__PURE__ */ jsxs12(Fragment7, { children: [
+            children: copiedSql ? /* @__PURE__ */ jsxs12(Fragment8, { children: [
               /* @__PURE__ */ jsx12(Check4, { className: "w-4 h-4 text-emerald-400" }),
               /* @__PURE__ */ jsx12("span", { children: "\u062A\u0645 \u0627\u0644\u0646\u0633\u062E \u0628\u0646\u062C\u0627\u062D!" })
-            ] }) : /* @__PURE__ */ jsxs12(Fragment7, { children: [
+            ] }) : /* @__PURE__ */ jsxs12(Fragment8, { children: [
               /* @__PURE__ */ jsx12(Copy4, { className: "w-4 h-4" }),
               /* @__PURE__ */ jsx12("span", { children: "\u0646\u0633\u062E \u0643\u0648\u062F \u0627\u0644\u0640 SQL \u0628\u0627\u0644\u0643\u0627\u0645\u0644" })
             ] })
@@ -6161,13 +6239,13 @@ function App() {
           currentUser: null
         }
       ),
-      /* @__PURE__ */ jsx13("main", { className: "flex-1 flex items-center justify-center", children: /* @__PURE__ */ jsx13(AuthView, { onAuthSuccess: (user) => {
+      /* @__PURE__ */ jsx13("main", { className: "flex-1 flex flex-col justify-center items-center py-6 px-3 sm:px-4 w-full max-w-full overflow-x-hidden", children: /* @__PURE__ */ jsx13(AuthView, { onAuthSuccess: (user) => {
         setCurrentUser(user);
         setCurrentTab("transfer");
       } }) })
     ] });
   }
-  return /* @__PURE__ */ jsxs13("div", { className: "min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-blue-500 selection:text-white antialiased", children: [
+  return /* @__PURE__ */ jsxs13("div", { className: "min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-blue-500 selection:text-white antialiased overflow-x-hidden w-full max-w-full", children: [
     /* @__PURE__ */ jsx13(
       Navbar,
       {
@@ -6184,7 +6262,7 @@ function App() {
         onLogout: handleLogout
       }
     ),
-    /* @__PURE__ */ jsx13("main", { className: "flex-1 pb-16", children: currentTab === "profile" ? /* @__PURE__ */ jsx13(
+    /* @__PURE__ */ jsx13("main", { className: "flex-1 pb-24 sm:pb-16 w-full max-w-full overflow-x-hidden", children: currentTab === "profile" ? /* @__PURE__ */ jsx13(
       ProfileView,
       {
         user: currentUser,
