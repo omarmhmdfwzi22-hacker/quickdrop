@@ -1217,16 +1217,38 @@ export async function signInWithGoogle(googleProfile?: {
   const supabase = getSupabaseClient();
   if (supabase) {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: typeof window !== 'undefined' ? window.location.origin : undefined,
-        },
-      });
-      if (error) return { success: false, error: error.message };
-      return { success: true };
+      const { url, anonKey } = getSupabaseCredentials();
+      let isGoogleEnabled = true;
+      try {
+        const settingsRes = await fetch(`${url}/auth/v1/settings`, {
+          headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` },
+        });
+        if (settingsRes.ok) {
+          const settings = await settingsRes.json();
+          if (settings?.external?.google === false) {
+            isGoogleEnabled = false;
+          }
+        }
+      } catch {
+        // ignore network error
+      }
+
+      if (isGoogleEnabled) {
+        const returnUrl = typeof window !== 'undefined'
+          ? (window.location.href.split('?')[0].split('#')[0])
+          : undefined;
+
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: returnUrl,
+          },
+        });
+        if (error) return { success: false, error: error.message };
+        return { success: true };
+      }
     } catch (err: any) {
-      return { success: false, error: err.message || 'Google OAuth failed' };
+      console.warn('Google OAuth check:', err);
     }
   }
 

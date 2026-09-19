@@ -2848,16 +2848,33 @@ async function signInWithGoogle(googleProfile) {
   const supabase = getSupabaseClient();
   if (supabase) {
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: typeof window !== "undefined" ? window.location.origin : void 0
+      const { url, anonKey } = getSupabaseCredentials();
+      let isGoogleEnabled = true;
+      try {
+        const settingsRes = await fetch(`${url}/auth/v1/settings`, {
+          headers: { apikey: anonKey, Authorization: `Bearer ${anonKey}` }
+        });
+        if (settingsRes.ok) {
+          const settings = await settingsRes.json();
+          if (settings?.external?.google === false) {
+            isGoogleEnabled = false;
+          }
         }
-      });
-      if (error) return { success: false, error: error.message };
-      return { success: true };
+      } catch {
+      }
+      if (isGoogleEnabled) {
+        const returnUrl = typeof window !== "undefined" ? window.location.href.split("?")[0].split("#")[0] : void 0;
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: returnUrl
+          }
+        });
+        if (error) return { success: false, error: error.message };
+        return { success: true };
+      }
     } catch (err) {
-      return { success: false, error: err.message || "Google OAuth failed" };
+      console.warn("Google OAuth check:", err);
     }
   }
   const googleClientId = typeof import.meta !== "undefined" && import.meta.env ? import.meta.env.VITE_GOOGLE_CLIENT_ID : void 0;
