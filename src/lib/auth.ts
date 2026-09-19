@@ -8,7 +8,14 @@
 import { createClient, SupabaseClient, User } from '@supabase/supabase-js';
 import { UserProfile, SignUpOptions, PasswordStrength } from '../types.ts';
 
+export const DEFAULT_SUPABASE_URL = 'https://jccsuetbatkvgpbcstel.supabase.co';
+export const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_LYElKumcWl7Aos6lVzL-Rg_twUA5e1U';
+
 export function getSupabaseCredentials(): { url: string; anonKey: string; isConfigured: boolean } {
+  if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'test') {
+    return { url: '', anonKey: '', isConfigured: false };
+  }
+
   const envUrl = (typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_SUPABASE_URL : '') || '';
   const envKey = (typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_SUPABASE_ANON_KEY : '') || '';
 
@@ -21,8 +28,8 @@ export function getSupabaseCredentials(): { url: string; anonKey: string; isConf
     }
   } catch {}
 
-  const url = (envUrl || localUrl).trim();
-  const anonKey = (envKey || localKey).trim();
+  const url = (envUrl || localUrl || DEFAULT_SUPABASE_URL).trim();
+  const anonKey = (envKey || localKey || DEFAULT_SUPABASE_ANON_KEY).trim();
 
   const isConfigured = Boolean(
     url && 

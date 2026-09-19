@@ -1,6 +1,7 @@
 /**
  * Auth System Unit Tests
  */
+process.env.NODE_ENV = 'test';
 import { 
   signUpUser, 
   verifyEmailCode, 

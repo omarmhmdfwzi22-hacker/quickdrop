@@ -1916,7 +1916,12 @@ import {
 
 // src/lib/auth.ts
 import { createClient } from "@supabase/supabase-js";
+var DEFAULT_SUPABASE_URL = "https://jccsuetbatkvgpbcstel.supabase.co";
+var DEFAULT_SUPABASE_ANON_KEY = "sb_publishable_LYElKumcWl7Aos6lVzL-Rg_twUA5e1U";
 function getSupabaseCredentials() {
+  if (typeof process !== "undefined" && process.env && false) {
+    return { url: "", anonKey: "", isConfigured: false };
+  }
   const envUrl = (typeof import.meta !== "undefined" && import.meta.env ? import.meta.env.VITE_SUPABASE_URL : "") || "";
   const envKey = (typeof import.meta !== "undefined" && import.meta.env ? import.meta.env.VITE_SUPABASE_ANON_KEY : "") || "";
   let localUrl = "";
@@ -1928,8 +1933,8 @@ function getSupabaseCredentials() {
     }
   } catch {
   }
-  const url = (envUrl || localUrl).trim();
-  const anonKey = (envKey || localKey).trim();
+  const url = (envUrl || localUrl || DEFAULT_SUPABASE_URL).trim();
+  const anonKey = (envKey || localKey || DEFAULT_SUPABASE_ANON_KEY).trim();
   const isConfigured = Boolean(
     url && anonKey && !url.includes("your-project") && !anonKey.includes("your-anon-key")
   );
