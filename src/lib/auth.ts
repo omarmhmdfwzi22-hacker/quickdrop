@@ -954,12 +954,32 @@ export async function signOutUser(): Promise<void> {
   const supabase = getSupabaseClient();
   if (supabase) {
     try {
-      await supabase.auth.signOut();
+      await supabase.auth.signOut({ scope: 'global' });
     } catch (err) {
       console.warn('Supabase sign out error:', err);
     }
   }
+
+  // Prevent Google from automatically re-signing into the same account without prompt
+  if (typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
+    try {
+      (window as any).google.accounts.id.disableAutoSelect();
+    } catch {}
+  }
+
   localStorage.removeItem(STORAGE_CURRENT_USER);
+
+  // Clear all Supabase auth tokens so it doesn't auto-restore previous user session
+  try {
+    const keysToRemove: string[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && (key.startsWith('sb-') || key.includes('supabase.auth.token'))) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach((k) => localStorage.removeItem(k));
+  } catch {}
 }
 
 /**
@@ -1247,6 +1267,10 @@ export async function signInWithGoogle(googleProfile?: {
           provider: 'google',
           options: {
             redirectTo: returnUrl,
+            queryParams: {
+              prompt: 'select_account',
+              access_type: 'offline',
+            },
           },
         });
         if (error) return { success: false, error: error.message };
@@ -1279,6 +1303,7 @@ export async function signInWithGoogle(googleProfile?: {
         const client = google.accounts.oauth2.initTokenClient({
           client_id: googleClientId.trim(),
           scope: 'email profile openid',
+          prompt: 'select_account',
           callback: async (tokenResponse: any) => {
             if (tokenResponse.error) {
               resolve({
