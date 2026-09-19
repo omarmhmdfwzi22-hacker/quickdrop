@@ -61,15 +61,51 @@ export default function App() {
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [isManualJoinOpen, setIsManualJoinOpen] = useState(false);
 
-  // Transfers
-  const [files, setFiles] = useState<FileTransferItem[]>([]);
-  const [texts, setTexts] = useState<TextTransferItem[]>([]);
+  // Transfers & Persistent History
+  const [files, setFiles] = useState<FileTransferItem[]>(() => {
+    try {
+      const raw = localStorage.getItem('quickdrop_transfer_history');
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [texts, setTexts] = useState<TextTransferItem[]>(() => {
+    try {
+      const raw = localStorage.getItem('quickdrop_text_history');
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  });
   const [incomingOffer, setIncomingOffer] = useState<FileTransferItem | null>(null);
   const [autoAccept, setAutoAccept] = useState<boolean>(() => {
     const saved = localStorage.getItem('quickdrop_auto_accept');
     // Default to true for zero-friction transfers
     return saved !== null ? saved === 'true' : true;
   });
+
+  // Automatically sync files to persistent localStorage
+  useEffect(() => {
+    try {
+      const toSave = files.slice(0, 100).map((f) => ({
+        ...f,
+        blobUrl: f.blobUrl && !f.blobUrl.startsWith('blob:') ? f.blobUrl : undefined,
+      }));
+      localStorage.setItem('quickdrop_transfer_history', JSON.stringify(toSave));
+    } catch (err) {
+      console.warn('Could not save transfer history:', err);
+    }
+  }, [files]);
+
+  // Automatically sync shared texts to persistent localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('quickdrop_text_history', JSON.stringify(texts.slice(0, 100)));
+    } catch (err) {
+      console.warn('Could not save text history:', err);
+    }
+  }, [texts]);
 
   const signalingClientRef = useRef<SignalingClient | null>(null);
   const webrtcManagerRef = useRef<WebRTCManager | null>(null);
@@ -290,18 +326,28 @@ export default function App() {
         },
         onFileCompleted: async (item) => {
           setIncomingOffer((current) => (current?.id === item.id ? null : current));
-          setFiles((prev) =>
-            prev.map((f) => (f.id === item.id ? { ...item } : f))
-          );
+          const completedItem: FileTransferItem = {
+            ...item,
+            state: 'completed',
+            progress: 100,
+            endTime: item.endTime || Date.now(),
+          };
+          setFiles((prev) => {
+            const exists = prev.some((f) => f.id === item.id);
+            if (exists) {
+              return prev.map((f) => (f.id === item.id ? completedItem : f));
+            }
+            return [completedItem, ...prev];
+          });
 
           // Record transfer in Supabase Database
           if (session?.sessionId) {
-            SupabaseService.recordTransfer(item, session.sessionId, 'webrtc_p2p').catch(() => {});
+            SupabaseService.recordTransfer(completedItem, session.sessionId, 'webrtc_p2p').catch(() => {});
           }
 
           // Automatically trigger File System Access API or anchor download on receiver
-          if (item.isIncoming && item.blobUrl) {
-            await autoSaveReceivedFile(item);
+          if (completedItem.isIncoming && completedItem.blobUrl) {
+            await autoSaveReceivedFile(completedItem);
           }
         },
         onFileFailed: (itemId, error) => {
@@ -831,9 +877,14 @@ export default function App() {
     webrtcManagerRef.current?.cancelTransfer(itemId);
   };
 
-  // Clear session history
+  // Clear persistent history
   const handleClearHistory = () => {
     setFiles((prev) => prev.filter((f) => f.state === 'transferring' || f.state === 'preparing'));
+    setTexts([]);
+    try {
+      localStorage.removeItem('quickdrop_transfer_history');
+      localStorage.removeItem('quickdrop_text_history');
+    } catch {}
   };
 
   // Loading indicator while checking authentication state
@@ -864,7 +915,7 @@ export default function App() {
           ) : currentTab === 'help' ? (
             <HelpView />
           ) : currentTab === 'history' ? (
-            <HistoryView files={files} onClearHistory={handleClearHistory} />
+            <HistoryView files={files} texts={texts} onClearHistory={handleClearHistory} />
           ) : (
             <AuthView onAuthSuccess={(user) => {
               setCurrentUser(user);
@@ -906,6 +957,7 @@ export default function App() {
         ) : currentTab === 'history' ? (
           <HistoryView
             files={files}
+            texts={texts}
             onClearHistory={handleClearHistory}
           />
         ) : currentTab === 'privacy' ? (
