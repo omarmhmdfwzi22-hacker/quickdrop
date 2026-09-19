@@ -32,8 +32,15 @@ import { SupabaseService } from './lib/supabase-service.ts';
 export default function App() {
   const [currentTab, setCurrentTab] = useState<AppTab>('transfer');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
-  const [isAuthLoading, setIsAuthLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    try {
+      const raw = localStorage.getItem('quickdrop_user');
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
   const [rawDeviceInfo] = useState<DeviceInfo>(getLocalDeviceInfo());
   const [peerDeviceInfo, setPeerDeviceInfo] = useState<DeviceInfo | undefined>(undefined);
 
@@ -838,13 +845,13 @@ export default function App() {
     );
   }
 
-  // If user is not logged in, show the Login/Register/OTP Verification screen
+  // If user is not logged in, show Login/Register while enabling tab navigation
   if (!currentUser) {
     return (
       <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-blue-500 selection:text-white antialiased">
         <Navbar
-          currentTab="transfer"
-          onTabChange={() => {}}
+          currentTab={currentTab}
+          onTabChange={setCurrentTab}
           connectionState="disconnected"
           theme={theme}
           onToggleTheme={toggleTheme}
@@ -852,10 +859,18 @@ export default function App() {
           currentUser={null}
         />
         <main className="flex-1 flex flex-col justify-center items-center py-6 px-3 sm:px-4 w-full max-w-full overflow-x-hidden">
-          <AuthView onAuthSuccess={(user) => {
-            setCurrentUser(user);
-            setCurrentTab('transfer');
-          }} />
+          {currentTab === 'privacy' ? (
+            <PrivacyView />
+          ) : currentTab === 'help' ? (
+            <HelpView />
+          ) : currentTab === 'history' ? (
+            <HistoryView files={files} onClearHistory={handleClearHistory} />
+          ) : (
+            <AuthView onAuthSuccess={(user) => {
+              setCurrentUser(user);
+              setCurrentTab('transfer');
+            }} />
+          )}
         </main>
       </div>
     );
