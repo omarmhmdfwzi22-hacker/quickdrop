@@ -3,10 +3,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 // src/App.tsx
-import { useState as useState8, useEffect as useEffect5, useRef as useRef6, useCallback, useMemo } from "react";
+import { useState as useState9, useEffect as useEffect5, useRef as useRef6, useCallback, useMemo } from "react";
 
 // src/components/Navbar.tsx
-import React2 from "react";
+import React2, { useState as useState2 } from "react";
 import {
   ShieldCheck,
   HelpCircle,
@@ -19,7 +19,9 @@ import {
   Wifi,
   WifiOff,
   User,
-  LogOut
+  LogOut,
+  Menu,
+  X
 } from "lucide-react";
 
 // src/components/UserAvatar.tsx
@@ -127,7 +129,8 @@ var Navbar = ({
   currentUser,
   onLogout
 }) => {
-  const [timeLeft, setTimeLeft] = React2.useState("");
+  const [timeLeft, setTimeLeft] = useState2("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState2(false);
   React2.useEffect(() => {
     if (!sessionExpiresAt) {
       setTimeLeft("");
@@ -177,12 +180,16 @@ var Navbar = ({
         return null;
     }
   };
-  return /* @__PURE__ */ jsxs2(Fragment, { children: [
-    /* @__PURE__ */ jsx2("header", { className: "sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors", children: /* @__PURE__ */ jsxs2("div", { className: "max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3", children: [
-      /* @__PURE__ */ jsx2("div", { className: "flex items-center gap-2 sm:gap-3 shrink-0", children: /* @__PURE__ */ jsxs2(
+  const handleSelectTab = (tab) => {
+    onTabChange(tab);
+    setIsMobileMenuOpen(false);
+  };
+  return /* @__PURE__ */ jsxs2("header", { className: "sticky top-0 z-40 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md transition-colors", children: [
+    /* @__PURE__ */ jsxs2("div", { className: "max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3", children: [
+      /* @__PURE__ */ jsx2("div", { className: "flex items-center gap-2.5 sm:gap-3 shrink-0", children: /* @__PURE__ */ jsxs2(
         "button",
         {
-          onClick: () => onTabChange("transfer"),
+          onClick: () => handleSelectTab("transfer"),
           className: "flex items-center gap-2 sm:gap-2.5 text-left group focus:outline-none",
           id: "brand-home-btn",
           children: [
@@ -209,7 +216,7 @@ var Navbar = ({
           /* @__PURE__ */ jsx2(
             "button",
             {
-              onClick: () => onTabChange("transfer"),
+              onClick: () => handleSelectTab("transfer"),
               className: `px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "transfer" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
               id: "nav-tab-transfer",
               children: "Transfer"
@@ -218,7 +225,7 @@ var Navbar = ({
           /* @__PURE__ */ jsxs2(
             "button",
             {
-              onClick: () => onTabChange("history"),
+              onClick: () => handleSelectTab("history"),
               className: `px-3 py-1.5 rounded-md transition-all flex items-center gap-1 cursor-pointer ${currentTab === "history" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
               id: "nav-tab-history",
               children: [
@@ -230,7 +237,7 @@ var Navbar = ({
           /* @__PURE__ */ jsxs2(
             "button",
             {
-              onClick: () => onTabChange("privacy"),
+              onClick: () => handleSelectTab("privacy"),
               className: `hidden md:inline-flex items-center gap-1 px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "privacy" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
               id: "nav-tab-privacy",
               children: [
@@ -242,7 +249,7 @@ var Navbar = ({
           /* @__PURE__ */ jsxs2(
             "button",
             {
-              onClick: () => onTabChange("help"),
+              onClick: () => handleSelectTab("help"),
               className: `inline-flex items-center gap-1 px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "help" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
               id: "nav-tab-help",
               children: [
@@ -254,7 +261,7 @@ var Navbar = ({
           currentUser && /* @__PURE__ */ jsxs2(
             "button",
             {
-              onClick: () => onTabChange("profile"),
+              onClick: () => handleSelectTab("profile"),
               className: `flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-all cursor-pointer ${currentTab === "profile" ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs" : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"}`,
               id: "nav-tab-profile",
               title: "\u0627\u0644\u062D\u0633\u0627\u0628 \u0627\u0644\u0634\u062E\u0635\u064A",
@@ -281,7 +288,7 @@ var Navbar = ({
             title: "\u0625\u0646\u0647\u0627\u0621 \u0627\u0644\u062C\u0644\u0633\u0629",
             children: [
               /* @__PURE__ */ jsx2(XCircle, { className: "w-3.5 h-3.5" }),
-              /* @__PURE__ */ jsx2("span", { className: "hidden xs:inline", children: "End" })
+              /* @__PURE__ */ jsx2("span", { className: "hidden sm:inline", children: "End" })
             ]
           }
         ),
@@ -290,7 +297,7 @@ var Navbar = ({
           {
             type: "button",
             onClick: onLogout,
-            className: "p-2 rounded-lg text-zinc-500 hover:text-rose-600 dark:text-zinc-400 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer focus:outline-none",
+            className: "hidden sm:inline-flex p-2 rounded-lg text-zinc-500 hover:text-rose-600 dark:text-zinc-400 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer focus:outline-none",
             title: "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062E\u0631\u0648\u062C (Log out)",
             "aria-label": "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062E\u0631\u0648\u062C",
             id: "quick-logout-btn",
@@ -308,83 +315,133 @@ var Navbar = ({
             id: "theme-toggle-btn",
             children: theme === "dark" ? /* @__PURE__ */ jsx2(Sun, { className: "w-4 h-4 text-amber-400" }) : /* @__PURE__ */ jsx2(Moon, { className: "w-4 h-4 text-zinc-700" })
           }
+        ),
+        /* @__PURE__ */ jsx2(
+          "button",
+          {
+            type: "button",
+            onClick: () => setIsMobileMenuOpen(!isMobileMenuOpen),
+            className: "sm:hidden p-2 rounded-xl text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer focus:outline-none",
+            "aria-label": "\u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629",
+            "aria-expanded": isMobileMenuOpen,
+            id: "mobile-menu-toggle-btn",
+            children: isMobileMenuOpen ? /* @__PURE__ */ jsx2(X, { className: "w-5 h-5 text-blue-600 dark:text-blue-400" }) : /* @__PURE__ */ jsx2(Menu, { className: "w-5 h-5" })
+          }
         )
       ] })
-    ] }) }),
-    /* @__PURE__ */ jsx2("div", { className: "sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg border-t border-zinc-200 dark:border-zinc-800 py-1.5 px-3 pb-safe shadow-lg transition-colors", children: /* @__PURE__ */ jsxs2("div", { className: "flex items-center justify-around max-w-md mx-auto", children: [
-      /* @__PURE__ */ jsxs2(
+    ] }),
+    isMobileMenuOpen && /* @__PURE__ */ jsxs2("div", { className: "sm:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl px-4 py-3 space-y-2 shadow-xl animate-in slide-in-from-top-2 duration-150", children: [
+      connectionState !== "idle" && /* @__PURE__ */ jsxs2("div", { className: "pb-2 border-b border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between", children: [
+        getConnectionBadge(),
+        timeLeft && /* @__PURE__ */ jsxs2("span", { className: "text-xs text-zinc-500 font-mono", children: [
+          "Expires in ",
+          timeLeft
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs2("div", { className: "space-y-1", children: [
+        /* @__PURE__ */ jsxs2(
+          "button",
+          {
+            type: "button",
+            onClick: () => handleSelectTab("transfer"),
+            className: `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${currentTab === "transfer" ? "bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400" : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900"}`,
+            children: [
+              /* @__PURE__ */ jsx2(ArrowLeftRight, { className: "w-4 h-4 text-blue-500" }),
+              /* @__PURE__ */ jsx2("span", { children: "\u0646\u0642\u0644 \u0627\u0644\u0645\u0644\u0641\u0627\u062A (Transfer)" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxs2(
+          "button",
+          {
+            type: "button",
+            onClick: () => handleSelectTab("history"),
+            className: `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${currentTab === "history" ? "bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400" : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900"}`,
+            children: [
+              /* @__PURE__ */ jsx2(History, { className: "w-4 h-4 text-emerald-500" }),
+              /* @__PURE__ */ jsx2("span", { children: "\u0633\u062C\u0644 \u0627\u0644\u062A\u062D\u0648\u064A\u0644\u0627\u062A (History)" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxs2(
+          "button",
+          {
+            type: "button",
+            onClick: () => handleSelectTab("help"),
+            className: `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${currentTab === "help" ? "bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400" : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900"}`,
+            children: [
+              /* @__PURE__ */ jsx2(HelpCircle, { className: "w-4 h-4 text-amber-500" }),
+              /* @__PURE__ */ jsx2("span", { children: "\u0627\u0644\u0645\u0633\u0627\u0639\u062F\u0629 \u0648\u0627\u0644\u0623\u0633\u0626\u0644\u0629 (Help)" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxs2(
+          "button",
+          {
+            type: "button",
+            onClick: () => handleSelectTab("privacy"),
+            className: `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${currentTab === "privacy" ? "bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400" : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900"}`,
+            children: [
+              /* @__PURE__ */ jsx2(ShieldCheck, { className: "w-4 h-4 text-purple-500" }),
+              /* @__PURE__ */ jsx2("span", { children: "\u0627\u0644\u062E\u0635\u0648\u0635\u064A\u0629 \u0648\u0627\u0644\u062A\u0634\u0641\u064A\u0631 (Privacy)" })
+            ]
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsx2("div", { className: "pt-2 border-t border-zinc-100 dark:border-zinc-800/80 space-y-1", children: currentUser ? /* @__PURE__ */ jsxs2(Fragment, { children: [
+        /* @__PURE__ */ jsxs2(
+          "button",
+          {
+            type: "button",
+            onClick: () => handleSelectTab("profile"),
+            className: `w-full flex items-center justify-between p-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${currentTab === "profile" ? "bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400" : "text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900"}`,
+            children: [
+              /* @__PURE__ */ jsxs2("div", { className: "flex items-center gap-2.5 min-w-0", children: [
+                /* @__PURE__ */ jsx2(
+                  UserAvatar,
+                  {
+                    name: currentUser.name,
+                    avatarUrl: currentUser.avatarUrl,
+                    size: "sm"
+                  }
+                ),
+                /* @__PURE__ */ jsxs2("div", { className: "text-left min-w-0", children: [
+                  /* @__PURE__ */ jsx2("div", { className: "font-bold text-xs truncate max-w-[180px]", children: currentUser.name || "\u062D\u0633\u0627\u0628\u064A" }),
+                  /* @__PURE__ */ jsx2("div", { className: "text-[10px] text-zinc-400 truncate max-w-[180px]", children: currentUser.email })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx2("span", { className: "text-xs text-blue-500 font-normal", children: "\u0625\u062F\u0627\u0631\u0629 \u2190" })
+            ]
+          }
+        ),
+        onLogout && /* @__PURE__ */ jsxs2(
+          "button",
+          {
+            type: "button",
+            onClick: () => {
+              setIsMobileMenuOpen(false);
+              onLogout();
+            },
+            className: "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer",
+            children: [
+              /* @__PURE__ */ jsx2(LogOut, { className: "w-4 h-4" }),
+              /* @__PURE__ */ jsx2("span", { children: "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062E\u0631\u0648\u062C \u0645\u0646 \u0627\u0644\u062D\u0633\u0627\u0628" })
+            ]
+          }
+        )
+      ] }) : /* @__PURE__ */ jsxs2(
         "button",
         {
           type: "button",
-          onClick: () => onTabChange("transfer"),
-          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "transfer" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
-          id: "mobile-nav-transfer",
+          onClick: () => handleSelectTab("profile"),
+          className: "w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm transition-colors cursor-pointer",
           children: [
-            /* @__PURE__ */ jsx2(ArrowLeftRight, { className: `w-5 h-5 ${currentTab === "transfer" ? "stroke-[2.5]" : ""}` }),
-            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u0646\u0642\u0644" })
+            /* @__PURE__ */ jsx2(User, { className: "w-4 h-4" }),
+            /* @__PURE__ */ jsx2("span", { children: "\u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 / \u0625\u0646\u0634\u0627\u0621 \u062D\u0633\u0627\u0628" })
           ]
         }
-      ),
-      /* @__PURE__ */ jsxs2(
-        "button",
-        {
-          type: "button",
-          onClick: () => onTabChange("history"),
-          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "history" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
-          id: "mobile-nav-history",
-          children: [
-            /* @__PURE__ */ jsx2(History, { className: `w-5 h-5 ${currentTab === "history" ? "stroke-[2.5]" : ""}` }),
-            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u0627\u0644\u0633\u062C\u0644" })
-          ]
-        }
-      ),
-      /* @__PURE__ */ jsxs2(
-        "button",
-        {
-          type: "button",
-          onClick: () => onTabChange("help"),
-          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "help" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
-          id: "mobile-nav-help",
-          children: [
-            /* @__PURE__ */ jsx2(HelpCircle, { className: `w-5 h-5 ${currentTab === "help" ? "stroke-[2.5]" : ""}` }),
-            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u0645\u0633\u0627\u0639\u062F\u0629" })
-          ]
-        }
-      ),
-      currentUser ? /* @__PURE__ */ jsxs2(
-        "button",
-        {
-          type: "button",
-          onClick: () => onTabChange("profile"),
-          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "profile" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
-          id: "mobile-nav-profile",
-          children: [
-            /* @__PURE__ */ jsx2(
-              UserAvatar,
-              {
-                name: currentUser.name,
-                avatarUrl: currentUser.avatarUrl,
-                size: "xs",
-                className: currentTab === "profile" ? "ring-2 ring-blue-500" : ""
-              }
-            ),
-            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5 max-w-[65px] truncate", children: currentUser.name || "\u062D\u0633\u0627\u0628\u064A" })
-          ]
-        }
-      ) : /* @__PURE__ */ jsxs2(
-        "button",
-        {
-          type: "button",
-          onClick: () => onTabChange("profile"),
-          className: `flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all cursor-pointer ${currentTab === "profile" ? "text-blue-600 dark:text-blue-400 font-bold" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 font-medium"}`,
-          id: "mobile-nav-login",
-          children: [
-            /* @__PURE__ */ jsx2(User, { className: `w-5 h-5 ${currentTab === "profile" ? "stroke-[2.5]" : ""}` }),
-            /* @__PURE__ */ jsx2("span", { className: "text-[11px] mt-0.5", children: "\u062F\u062E\u0648\u0644" })
-          ]
-        }
-      )
-    ] }) })
+      ) })
+    ] })
   ] });
 };
 
@@ -499,13 +556,13 @@ var LandingView = ({
 };
 
 // src/components/PairingCard.tsx
-import { useEffect, useRef, useState as useState2 } from "react";
+import { useEffect, useRef, useState as useState3 } from "react";
 import QRCode from "qrcode";
 import {
   Copy,
   Check,
   RefreshCw,
-  X,
+  X as X2,
   Clock as Clock2,
   Share2 as Share22
 } from "lucide-react";
@@ -517,9 +574,9 @@ var PairingCard = ({
   theme
 }) => {
   const canvasRef = useRef(null);
-  const [copiedCode, setCopiedCode] = useState2(false);
-  const [copiedLink, setCopiedLink] = useState2(false);
-  const [timeLeft, setTimeLeft] = useState2("");
+  const [copiedCode, setCopiedCode] = useState3(false);
+  const [copiedLink, setCopiedLink] = useState3(false);
+  const [timeLeft, setTimeLeft] = useState3("");
   const getJoinUrl = () => {
     try {
       const url = new URL(window.location.href);
@@ -649,7 +706,7 @@ var PairingCard = ({
           title: "Cancel Session and return home",
           id: "cancel-pairing-btn",
           children: [
-            /* @__PURE__ */ jsx4(X, { className: "w-4 h-4" }),
+            /* @__PURE__ */ jsx4(X2, { className: "w-4 h-4" }),
             /* @__PURE__ */ jsx4("span", { children: "\u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629" })
           ]
         }
@@ -663,9 +720,9 @@ var PairingCard = ({
 };
 
 // src/components/QrScannerModal.tsx
-import { useEffect as useEffect2, useRef as useRef2, useState as useState3 } from "react";
+import { useEffect as useEffect2, useRef as useRef2, useState as useState4 } from "react";
 import jsQR from "jsqr";
-import { Camera, X as X2, AlertCircle, RefreshCw as RefreshCw2, KeyRound } from "lucide-react";
+import { Camera, X as X3, AlertCircle, RefreshCw as RefreshCw2, KeyRound } from "lucide-react";
 import { jsx as jsx5, jsxs as jsxs5 } from "react/jsx-runtime";
 var QrScannerModal = ({
   isOpen,
@@ -677,9 +734,9 @@ var QrScannerModal = ({
   const canvasRef = useRef2(null);
   const streamRef = useRef2(null);
   const animationFrameRef = useRef2(null);
-  const [cameraError, setCameraError] = useState3(null);
-  const [isStartingCamera, setIsStartingCamera] = useState3(true);
-  const [scanMessage, setScanMessage] = useState3(null);
+  const [cameraError, setCameraError] = useState4(null);
+  const [isStartingCamera, setIsStartingCamera] = useState4(true);
+  const [scanMessage, setScanMessage] = useState4(null);
   useEffect2(() => {
     if (!isOpen) {
       stopCamera();
@@ -795,7 +852,7 @@ var QrScannerModal = ({
           onClick: onClose,
           className: "p-1.5 rounded-lg text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors focus:outline-none",
           id: "close-qr-scanner-btn",
-          children: /* @__PURE__ */ jsx5(X2, { className: "w-4 h-4" })
+          children: /* @__PURE__ */ jsx5(X3, { className: "w-4 h-4" })
         }
       )
     ] }),
@@ -862,8 +919,8 @@ var QrScannerModal = ({
 };
 
 // src/components/ManualJoinModal.tsx
-import { useState as useState4 } from "react";
-import { KeyRound as KeyRound2, X as X3, Camera as Camera2, ArrowRight as ArrowRight2, AlertCircle as AlertCircle2 } from "lucide-react";
+import { useState as useState5 } from "react";
+import { KeyRound as KeyRound2, X as X4, Camera as Camera2, ArrowRight as ArrowRight2, AlertCircle as AlertCircle2 } from "lucide-react";
 import { Fragment as Fragment4, jsx as jsx6, jsxs as jsxs6 } from "react/jsx-runtime";
 var ManualJoinModal = ({
   isOpen,
@@ -871,9 +928,9 @@ var ManualJoinModal = ({
   onSubmit,
   onSwitchToCamera
 }) => {
-  const [inputValue, setInputValue] = useState4("");
-  const [isSubmitting, setIsSubmitting] = useState4(false);
-  const [errorMessage, setErrorMessage] = useState4(null);
+  const [inputValue, setInputValue] = useState5("");
+  const [isSubmitting, setIsSubmitting] = useState5(false);
+  const [errorMessage, setErrorMessage] = useState5(null);
   if (!isOpen) return null;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -905,7 +962,7 @@ var ManualJoinModal = ({
           onClick: onClose,
           className: "p-1.5 rounded-lg text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors focus:outline-none",
           id: "close-manual-join-btn",
-          children: /* @__PURE__ */ jsx6(X3, { className: "w-4 h-4" })
+          children: /* @__PURE__ */ jsx6(X4, { className: "w-4 h-4" })
         }
       )
     ] }),
@@ -966,7 +1023,7 @@ var ManualJoinModal = ({
 };
 
 // src/components/TransferDashboard.tsx
-import { useRef as useRef3, useState as useState5, useEffect as useEffect3 } from "react";
+import { useRef as useRef3, useState as useState6, useEffect as useEffect3 } from "react";
 import {
   UploadCloud,
   File,
@@ -976,7 +1033,7 @@ import {
   Music,
   Archive,
   Download,
-  X as X4,
+  X as X5,
   CheckCircle2,
   AlertCircle as AlertCircle3,
   Send,
@@ -1087,12 +1144,12 @@ var TransferDashboard = ({
   const imageInputRef = useRef3(null);
   const folderInputRef = useRef3(null);
   const cloudFileInputRef = useRef3(null);
-  const [isDraggingOver, setIsDraggingOver] = useState5(false);
-  const [textInput, setTextInput] = useState5("");
-  const [activeSubTab, setActiveSubTab] = useState5("files");
-  const [copiedTextId, setCopiedTextId] = useState5(null);
-  const [saveNotification, setSaveNotification] = useState5(null);
-  const [hasAttemptedMobileAutoPick, setHasAttemptedMobileAutoPick] = useState5(false);
+  const [isDraggingOver, setIsDraggingOver] = useState6(false);
+  const [textInput, setTextInput] = useState6("");
+  const [activeSubTab, setActiveSubTab] = useState6("files");
+  const [copiedTextId, setCopiedTextId] = useState6(null);
+  const [saveNotification, setSaveNotification] = useState6(null);
+  const [hasAttemptedMobileAutoPick, setHasAttemptedMobileAutoPick] = useState6(false);
   const isMobile = localDeviceInfo.type === "mobile" || typeof navigator !== "undefined" && /android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent);
   const hasFileSystemAccess = typeof window !== "undefined" && "showSaveFilePicker" in window;
   const isFolderSupported = typeof window !== "undefined" && "webkitdirectory" in document.createElement("input");
@@ -1274,7 +1331,7 @@ var TransferDashboard = ({
         {
           onClick: () => setSaveNotification(null),
           className: "text-emerald-600 hover:text-emerald-800 p-1 cursor-pointer",
-          children: /* @__PURE__ */ jsx7(X4, { className: "w-4 h-4" })
+          children: /* @__PURE__ */ jsx7(X5, { className: "w-4 h-4" })
         }
       )
     ] }),
@@ -1576,7 +1633,7 @@ var TransferDashboard = ({
                       onClick: () => onCancelTransfer(item.id),
                       className: "p-1.5 rounded-lg text-zinc-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer",
                       title: "\u0625\u0644\u063A\u0627\u0621 \u0627\u0644\u0646\u0642\u0644",
-                      children: /* @__PURE__ */ jsx7(X4, { className: "w-4 h-4" })
+                      children: /* @__PURE__ */ jsx7(X5, { className: "w-4 h-4" })
                     }
                   ),
                   item.state === "failed" && /* @__PURE__ */ jsxs7("span", { className: "inline-flex items-center gap-1 text-xs text-rose-600 dark:text-rose-400 font-medium", children: [
@@ -1972,7 +2029,7 @@ var HelpView = () => {
 };
 
 // src/components/AuthView.tsx
-import { useState as useState6, useEffect as useEffect4, useRef as useRef4 } from "react";
+import { useState as useState7, useEffect as useEffect4, useRef as useRef4 } from "react";
 import {
   Lock as Lock3,
   Mail,
@@ -2730,23 +2787,28 @@ async function signOutUser() {
   localStorage.removeItem(STORAGE_CURRENT_USER);
 }
 async function getActiveUser() {
+  let localUser = null;
+  try {
+    const raw = localStorage.getItem(STORAGE_CURRENT_USER);
+    if (raw) localUser = JSON.parse(raw);
+  } catch {
+  }
   const supabase = getSupabaseClient();
   if (supabase) {
     try {
-      const { data } = await supabase.auth.getSession();
-      if (data.session?.user) {
-        return await fetchOrCreateSupabaseProfile(data.session.user);
+      const sessionPromise = supabase.auth.getSession();
+      const timeoutPromise = new Promise(
+        (resolve) => setTimeout(() => resolve({ data: { session: null } }), 1200)
+      );
+      const res = await Promise.race([sessionPromise, timeoutPromise]);
+      if (res.data?.session?.user) {
+        return await fetchOrCreateSupabaseProfile(res.data.session.user);
       }
     } catch (err) {
       console.warn("Error fetching Supabase session:", err);
     }
   }
-  try {
-    const raw = localStorage.getItem(STORAGE_CURRENT_USER);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
+  return localUser;
 }
 async function updateUserProfile(updates) {
   const supabase = getSupabaseClient();
@@ -3143,32 +3205,32 @@ create policy "Avatar auth delete"
 // src/components/AuthView.tsx
 import { Fragment as Fragment7, jsx as jsx11, jsxs as jsxs11 } from "react/jsx-runtime";
 var AuthView = ({ onAuthSuccess }) => {
-  const [mode, setMode] = useState6("login");
-  const [email, setEmail] = useState6("");
-  const [password, setPassword] = useState6("");
-  const [confirmPassword, setConfirmPassword] = useState6("");
-  const [fullName, setFullName] = useState6("");
-  const [deviceName, setDeviceName] = useState6("\u062C\u0647\u0627\u0632\u064A (My Device)");
-  const [avatarFile, setAvatarFile] = useState6(null);
-  const [avatarPreview, setAvatarPreview] = useState6(null);
+  const [mode, setMode] = useState7("login");
+  const [email, setEmail] = useState7("");
+  const [password, setPassword] = useState7("");
+  const [confirmPassword, setConfirmPassword] = useState7("");
+  const [fullName, setFullName] = useState7("");
+  const [deviceName, setDeviceName] = useState7("\u062C\u0647\u0627\u0632\u064A (My Device)");
+  const [avatarFile, setAvatarFile] = useState7(null);
+  const [avatarPreview, setAvatarPreview] = useState7(null);
   const avatarInputRef = useRef4(null);
-  const [otpDigits, setOtpDigits] = useState6(["", "", "", "", "", ""]);
-  const [activeOtpCode, setActiveOtpCode] = useState6(null);
+  const [otpDigits, setOtpDigits] = useState7(["", "", "", "", "", ""]);
+  const [activeOtpCode, setActiveOtpCode] = useState7(null);
   const otpInputRefs = useRef4([]);
-  const [resendCooldown, setResendCooldown] = useState6(0);
-  const [showPassword, setShowPassword] = useState6(false);
-  const [loading, setLoading] = useState6(false);
-  const [errorMessage, setErrorMessage] = useState6(null);
-  const [successMessage, setSuccessMessage] = useState6(null);
-  const [hasSupabase, setHasSupabase] = useState6(() => checkIsSupabaseConfigured());
-  const [showSupabaseModal, setShowSupabaseModal] = useState6(false);
-  const [showSqlModal, setShowSqlModal] = useState6(false);
-  const [copiedSql, setCopiedSql] = useState6(false);
-  const [supabaseUrlInput, setSupabaseUrlInput] = useState6(() => getSupabaseCredentials().url);
-  const [supabaseKeyInput, setSupabaseKeyInput] = useState6(() => getSupabaseCredentials().anonKey);
-  const [supabaseConfigSuccess, setSupabaseConfigSuccess] = useState6(null);
-  const [supabaseConfigError, setSupabaseConfigError] = useState6(null);
-  const [incomingPairCode, setIncomingPairCode] = useState6(null);
+  const [resendCooldown, setResendCooldown] = useState7(0);
+  const [showPassword, setShowPassword] = useState7(false);
+  const [loading, setLoading] = useState7(false);
+  const [errorMessage, setErrorMessage] = useState7(null);
+  const [successMessage, setSuccessMessage] = useState7(null);
+  const [hasSupabase, setHasSupabase] = useState7(() => checkIsSupabaseConfigured());
+  const [showSupabaseModal, setShowSupabaseModal] = useState7(false);
+  const [showSqlModal, setShowSqlModal] = useState7(false);
+  const [copiedSql, setCopiedSql] = useState7(false);
+  const [supabaseUrlInput, setSupabaseUrlInput] = useState7(() => getSupabaseCredentials().url);
+  const [supabaseKeyInput, setSupabaseKeyInput] = useState7(() => getSupabaseCredentials().anonKey);
+  const [supabaseConfigSuccess, setSupabaseConfigSuccess] = useState7(null);
+  const [supabaseConfigError, setSupabaseConfigError] = useState7(null);
+  const [incomingPairCode, setIncomingPairCode] = useState7(null);
   useEffect4(() => {
     try {
       const params = new URLSearchParams(window.location.search);
@@ -3226,7 +3288,7 @@ var AuthView = ({ onAuthSuccess }) => {
       setSupabaseConfigSuccess(null);
     }, 1500);
   };
-  const [checkingStatus, setCheckingStatus] = useState6(false);
+  const [checkingStatus, setCheckingStatus] = useState7(false);
   const handleCheckConfirmationLink = async () => {
     clearMessages();
     setCheckingStatus(true);
@@ -4137,7 +4199,7 @@ var AuthView = ({ onAuthSuccess }) => {
 };
 
 // src/components/ProfileView.tsx
-import { useState as useState7, useRef as useRef5 } from "react";
+import { useState as useState8, useRef as useRef5 } from "react";
 import {
   User as User4,
   Mail as Mail2,
@@ -4163,19 +4225,19 @@ var ProfileView = ({
   onUpdateUser,
   onLogout
 }) => {
-  const [name, setName] = useState7(user.name);
-  const [deviceName, setDeviceName] = useState7(user.deviceName || "");
-  const [avatarUrl, setAvatarUrl] = useState7(user.avatarUrl || "");
-  const [saving, setSaving] = useState7(false);
-  const [uploadingAvatar, setUploadingAvatar] = useState7(false);
-  const [newPassword, setNewPassword] = useState7("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState7("");
-  const [showPassword, setShowPassword] = useState7(false);
-  const [updatingPassword, setUpdatingPassword] = useState7(false);
-  const [successMsg, setSuccessMsg] = useState7(null);
-  const [errorMsg, setErrorMsg] = useState7(null);
-  const [showSqlModal, setShowSqlModal] = useState7(false);
-  const [copiedSql, setCopiedSql] = useState7(false);
+  const [name, setName] = useState8(user.name);
+  const [deviceName, setDeviceName] = useState8(user.deviceName || "");
+  const [avatarUrl, setAvatarUrl] = useState8(user.avatarUrl || "");
+  const [saving, setSaving] = useState8(false);
+  const [uploadingAvatar, setUploadingAvatar] = useState8(false);
+  const [newPassword, setNewPassword] = useState8("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState8("");
+  const [showPassword, setShowPassword] = useState8(false);
+  const [updatingPassword, setUpdatingPassword] = useState8(false);
+  const [successMsg, setSuccessMsg] = useState8(null);
+  const [errorMsg, setErrorMsg] = useState8(null);
+  const [showSqlModal, setShowSqlModal] = useState8(false);
+  const [copiedSql, setCopiedSql] = useState8(false);
   const fileInputRef = useRef5(null);
   const passwordStrength = evaluatePasswordStrength(newPassword);
   const handleAvatarFileChange = async (e) => {
@@ -5547,12 +5609,12 @@ var WebRTCManager = class {
 // src/App.tsx
 import { jsx as jsx13, jsxs as jsxs13 } from "react/jsx-runtime";
 function App() {
-  const [currentTab, setCurrentTab] = useState8("transfer");
-  const [theme, setTheme] = useState8("dark");
-  const [currentUser, setCurrentUser] = useState8(null);
-  const [isAuthLoading, setIsAuthLoading] = useState8(true);
-  const [rawDeviceInfo] = useState8(getLocalDeviceInfo());
-  const [peerDeviceInfo, setPeerDeviceInfo] = useState8(void 0);
+  const [currentTab, setCurrentTab] = useState9("transfer");
+  const [theme, setTheme] = useState9("dark");
+  const [currentUser, setCurrentUser] = useState9(null);
+  const [isAuthLoading, setIsAuthLoading] = useState9(true);
+  const [rawDeviceInfo] = useState9(getLocalDeviceInfo());
+  const [peerDeviceInfo, setPeerDeviceInfo] = useState9(void 0);
   const localDeviceInfo = useMemo(() => {
     if (!currentUser) return rawDeviceInfo;
     return {
@@ -5560,15 +5622,15 @@ function App() {
       name: currentUser.deviceName?.trim() || currentUser.name?.trim() || rawDeviceInfo.name
     };
   }, [rawDeviceInfo, currentUser]);
-  const [session, setSession] = useState8(null);
-  const [connectionState, setConnectionState] = useState8("idle");
-  const [isCreatingSession, setIsCreatingSession] = useState8(false);
-  const [isScannerOpen, setIsScannerOpen] = useState8(false);
-  const [isManualJoinOpen, setIsManualJoinOpen] = useState8(false);
-  const [files, setFiles] = useState8([]);
-  const [texts, setTexts] = useState8([]);
-  const [incomingOffer, setIncomingOffer] = useState8(null);
-  const [autoAccept, setAutoAccept] = useState8(() => {
+  const [session, setSession] = useState9(null);
+  const [connectionState, setConnectionState] = useState9("idle");
+  const [isCreatingSession, setIsCreatingSession] = useState9(false);
+  const [isScannerOpen, setIsScannerOpen] = useState9(false);
+  const [isManualJoinOpen, setIsManualJoinOpen] = useState9(false);
+  const [files, setFiles] = useState9([]);
+  const [texts, setTexts] = useState9([]);
+  const [incomingOffer, setIncomingOffer] = useState9(null);
+  const [autoAccept, setAutoAccept] = useState9(() => {
     const saved = localStorage.getItem("quickdrop_auto_accept");
     return saved !== null ? saved === "true" : true;
   });
@@ -5592,8 +5654,14 @@ function App() {
   }, []);
   useEffect5(() => {
     let mounted = true;
+    const timer = setTimeout(() => {
+      if (mounted) {
+        setIsAuthLoading(false);
+      }
+    }, 1200);
     getActiveUser().then((user) => {
       if (mounted) {
+        clearTimeout(timer);
         if (!user && typeof window !== "undefined") {
           const params = new URLSearchParams(window.location.search);
           if (params.has("code") || params.has("join")) {
@@ -5608,7 +5676,10 @@ function App() {
       }
     }).catch((err) => {
       console.warn("Auth check error:", err);
-      if (mounted) setIsAuthLoading(false);
+      if (mounted) {
+        clearTimeout(timer);
+        setIsAuthLoading(false);
+      }
     });
     const unsubscribe = initAuthListener((user) => {
       if (mounted) {
@@ -5617,6 +5688,7 @@ function App() {
     });
     return () => {
       mounted = false;
+      clearTimeout(timer);
       unsubscribe();
     };
   }, []);
@@ -6262,7 +6334,7 @@ function App() {
         onLogout: handleLogout
       }
     ),
-    /* @__PURE__ */ jsx13("main", { className: "flex-1 pb-24 sm:pb-16 w-full max-w-full overflow-x-hidden", children: currentTab === "profile" ? /* @__PURE__ */ jsx13(
+    /* @__PURE__ */ jsx13("main", { className: "flex-1 pb-16 w-full max-w-full overflow-x-hidden", children: currentTab === "profile" ? /* @__PURE__ */ jsx13(
       ProfileView,
       {
         user: currentUser,

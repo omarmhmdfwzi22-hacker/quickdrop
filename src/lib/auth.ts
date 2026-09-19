@@ -966,24 +966,29 @@ export async function signOutUser(): Promise<void> {
  * Get active session user and load full profile
  */
 export async function getActiveUser(): Promise<UserProfile | null> {
+  let localUser: UserProfile | null = null;
+  try {
+    const raw = localStorage.getItem(STORAGE_CURRENT_USER);
+    if (raw) localUser = JSON.parse(raw);
+  } catch {}
+
   const supabase = getSupabaseClient();
   if (supabase) {
     try {
-      const { data } = await supabase.auth.getSession();
-      if (data.session?.user) {
-        return await fetchOrCreateSupabaseProfile(data.session.user);
+      const sessionPromise = supabase.auth.getSession();
+      const timeoutPromise = new Promise<{ data: { session: null } }>((resolve) =>
+        setTimeout(() => resolve({ data: { session: null } }), 1200)
+      );
+      const res = await Promise.race([sessionPromise, timeoutPromise]);
+      if (res.data?.session?.user) {
+        return await fetchOrCreateSupabaseProfile(res.data.session.user);
       }
     } catch (err) {
       console.warn('Error fetching Supabase session:', err);
     }
   }
 
-  try {
-    const raw = localStorage.getItem(STORAGE_CURRENT_USER);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
+  return localUser;
 }
 
 /**

@@ -88,9 +88,18 @@ export default function App() {
   // Check current authenticated user session on mount and listen for real-time auth changes
   useEffect(() => {
     let mounted = true;
+
+    // Safety timeout: Ensure app NEVER gets stuck on loading spinner
+    const timer = setTimeout(() => {
+      if (mounted) {
+        setIsAuthLoading(false);
+      }
+    }, 1200);
+
     getActiveUser()
       .then((user) => {
         if (mounted) {
+          clearTimeout(timer);
           if (!user && typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search);
             if (params.has('code') || params.has('join')) {
@@ -106,7 +115,10 @@ export default function App() {
       })
       .catch((err) => {
         console.warn('Auth check error:', err);
-        if (mounted) setIsAuthLoading(false);
+        if (mounted) {
+          clearTimeout(timer);
+          setIsAuthLoading(false);
+        }
       });
 
     // Listen to real-time auth session updates (token refresh, user updates, sign in/out)
@@ -118,6 +130,7 @@ export default function App() {
 
     return () => {
       mounted = false;
+      clearTimeout(timer);
       unsubscribe();
     };
   }, []);
@@ -866,7 +879,8 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-24 sm:pb-16 w-full max-w-full overflow-x-hidden">
+      <main className="flex-1 pb-16 w-full max-w-full overflow-x-hidden">
+
 
         {currentTab === 'profile' ? (
           <ProfileView
