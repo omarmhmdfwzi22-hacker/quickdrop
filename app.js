@@ -2877,7 +2877,7 @@ async function signInWithGoogle(googleProfile) {
       console.warn("Google OAuth check:", err);
     }
   }
-  const googleClientId = typeof import.meta !== "undefined" && import.meta.env ? import.meta.env.VITE_GOOGLE_CLIENT_ID : void 0;
+  const googleClientId = (typeof import.meta !== "undefined" && import.meta.env ? import.meta.env.VITE_GOOGLE_CLIENT_ID : void 0) || "27131217192-n9s40en36j2g094e0082nc3i13i3b1ag.apps.googleusercontent.com";
   if (googleClientId && googleClientId.trim()) {
     const loaded = await loadGoogleIdentityScript();
     const google = typeof window !== "undefined" ? window.google : void 0;

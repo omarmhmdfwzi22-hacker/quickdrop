@@ -1253,9 +1253,10 @@ export async function signInWithGoogle(googleProfile?: {
   }
 
   // 2. If Google Client ID is configured via environment:
-  const googleClientId = typeof import.meta !== 'undefined' && import.meta.env
+  const googleClientId = (typeof import.meta !== 'undefined' && import.meta.env
     ? (import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined)
-    : undefined;
+    : undefined) || '27131217192-n9s40en36j2g094e0082nc3i13i3b1ag.apps.googleusercontent.com';
+
 
   if (googleClientId && googleClientId.trim()) {
     const loaded = await loadGoogleIdentityScript();
