@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "node -e \"const fs=require('fs'); if(!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('index.html','dist/index.html'); fs.copyFileSync('app.js','dist/app.js');\"",
+    "bundle": "esbuild src/main.tsx --bundle --format=esm --loader:.css=empty --external:react --external:react-dom --external:react-dom/* --external:react/* --external:lucide-react --external:qrcode --external:jsqr --external:@supabase/supabase-js --outfile=app.js",
+    "build": "npm run bundle && node -e \"const fs=require('fs'); ['dist','public'].forEach(d=>{if(!fs.existsSync(d))fs.mkdirSync(d,{recursive:true}); fs.copyFileSync('app.js',d+'/app.js'); fs.copyFileSync('index.html',d+'/index.html'); if(fs.existsSync('404.html'))fs.copyFileSync('404.html',d+'/404.html'); if(fs.existsSync('style.css'))fs.copyFileSync('style.css',d+'/style.css');}); if(fs.existsSync('public/manifest.json'))fs.copyFileSync('public/manifest.json','dist/manifest.json');\"",
     "build:server": "esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "deploy": "wrangler deploy --assets ./dist",
     "start": "node dist/server.cjs",
@@ -21,6 +22,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "dotenv": "^17.2.3",
     "express": "^4.21.2",
+    "iceberg-js": "^1.0.0",
     "jsqr": "^1.4.0",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
@@ -40,7 +42,7 @@
     "@types/react-dom": "^19.3.0",
     "@types/ws": "^8.18.1",
     "autoprefixer": "^10.4.21",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.21.0",
     "typescript": "^7.0.2"

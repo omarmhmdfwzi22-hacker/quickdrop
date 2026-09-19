@@ -26,7 +26,7 @@ import {
 import { getLocalDeviceInfo } from './lib/device.ts';
 import { SignalingClient } from './lib/signaling.ts';
 import { WebRTCManager } from './lib/webrtc.ts';
-import { getActiveUser, signOutUser, initAuthListener } from './lib/auth.ts';
+import { getActiveUser, signOutUser, initAuthListener, quickGuestLogin } from './lib/auth.ts';
 import { SupabaseService } from './lib/supabase-service.ts';
 
 export default function App() {
@@ -91,6 +91,15 @@ export default function App() {
     getActiveUser()
       .then((user) => {
         if (mounted) {
+          if (!user && typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('code') || params.has('join')) {
+              const guest = quickGuestLogin();
+              setCurrentUser(guest);
+              setIsAuthLoading(false);
+              return;
+            }
+          }
           setCurrentUser(user);
           setIsAuthLoading(false);
         }

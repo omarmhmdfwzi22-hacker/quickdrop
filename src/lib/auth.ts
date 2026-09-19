@@ -128,6 +128,12 @@ function savePendingVerifications(items: PendingVerification[]) {
   localStorage.setItem(STORAGE_PENDING_VERIFICATION, JSON.stringify(items));
 }
 
+export function _getPendingCodeForTestingOnly(email: string): string | null {
+  const pending = getPendingVerifications();
+  const entry = pending.find((p) => p.email.toLowerCase() === email.trim().toLowerCase());
+  return entry ? entry.code : null;
+}
+
 /**
  * Evaluates password strength according to production security standards
  */
@@ -586,6 +592,16 @@ export async function signUpUser(
     return { success: false, error: 'هذا البريد الإلكتروني مسجل بالفعل. يرجى تسجيل الدخول بكلمة المرور الخاصة بك.' };
   }
 
+  // Generate 6-digit verification code
+  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  const pending = getPendingVerifications().filter((p) => p.email !== normalizedEmail);
+  pending.push({
+    email: normalizedEmail,
+    code,
+    expiresAt: Date.now() + 15 * 60 * 1000,
+  });
+  savePendingVerifications(pending);
+
   const newUser: StoredLocalUser = {
     id: 'user_' + Math.random().toString(36).substring(2, 11),
     email: normalizedEmail,
@@ -593,7 +609,7 @@ export async function signUpUser(
     name: cleanName,
     avatarUrl: localAvatarUrl,
     deviceName: cleanDevice,
-    emailConfirmed: true, // Auto-verified immediately!
+    emailConfirmed: false,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
@@ -609,14 +625,13 @@ export async function signUpUser(
     avatarUrl: newUser.avatarUrl,
     deviceName: newUser.deviceName,
     createdAt: newUser.createdAt,
-    emailConfirmed: true,
+    emailConfirmed: false,
   };
-
-  localStorage.setItem(STORAGE_CURRENT_USER, JSON.stringify(createdProfile));
 
   return {
     success: true,
-    needsEmailVerification: false, // Instant entry, no OTP wait
+    needsEmailVerification: true,
+    debugCode: code,
     user: createdProfile,
   };
 }
@@ -911,7 +926,7 @@ export function quickGuestLogin(): UserProfile {
     avatarUrl: profile.avatarUrl,
     deviceName: profile.deviceName,
     emailConfirmed: true,
-    createdAt: profile.createdAt,
+    createdAt: profile.createdAt || new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
 

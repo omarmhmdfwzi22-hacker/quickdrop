@@ -92,11 +92,12 @@ export const TransferDashboard: React.FC<TransferDashboardProps> = ({
       setHasAttemptedMobileAutoPick(true);
       // Attempt to open native picker (if allowed by browser's current interaction context)
       try {
-        if (fileInputRef.current) {
-          if ('showPicker' in fileInputRef.current) {
-            (fileInputRef.current as any).showPicker();
+        const inputEl = fileInputRef.current;
+        if (inputEl) {
+          if ('showPicker' in inputEl) {
+            (inputEl as any).showPicker();
           } else {
-            fileInputRef.current.click();
+            (inputEl as HTMLInputElement).click();
           }
         }
       } catch {

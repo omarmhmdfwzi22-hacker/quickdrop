@@ -1022,11 +1022,12 @@ var TransferDashboard = ({
     if (isMobile && !hasAttemptedMobileAutoPick && files.length === 0) {
       setHasAttemptedMobileAutoPick(true);
       try {
-        if (fileInputRef.current) {
-          if ("showPicker" in fileInputRef.current) {
-            fileInputRef.current.showPicker();
+        const inputEl = fileInputRef.current;
+        if (inputEl) {
+          if ("showPicker" in inputEl) {
+            inputEl.showPicker();
           } else {
-            fileInputRef.current.click();
+            inputEl.click();
           }
         }
       } catch {
@@ -2359,6 +2360,14 @@ async function signUpUser(emailOrOptions, maybePassword, maybeFullName, maybeAva
     }
     return { success: false, error: "\u0647\u0630\u0627 \u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0625\u0644\u0643\u062A\u0631\u0648\u0646\u064A \u0645\u0633\u062C\u0644 \u0628\u0627\u0644\u0641\u0639\u0644. \u064A\u0631\u062C\u0649 \u062A\u0633\u062C\u064A\u0644 \u0627\u0644\u062F\u062E\u0648\u0644 \u0628\u0643\u0644\u0645\u0629 \u0627\u0644\u0645\u0631\u0648\u0631 \u0627\u0644\u062E\u0627\u0635\u0629 \u0628\u0643." };
   }
+  const code = Math.floor(1e5 + Math.random() * 9e5).toString();
+  const pending = getPendingVerifications().filter((p) => p.email !== normalizedEmail);
+  pending.push({
+    email: normalizedEmail,
+    code,
+    expiresAt: Date.now() + 15 * 60 * 1e3
+  });
+  savePendingVerifications(pending);
   const newUser = {
     id: "user_" + Math.random().toString(36).substring(2, 11),
     email: normalizedEmail,
@@ -2366,8 +2375,7 @@ async function signUpUser(emailOrOptions, maybePassword, maybeFullName, maybeAva
     name: cleanName,
     avatarUrl: localAvatarUrl,
     deviceName: cleanDevice,
-    emailConfirmed: true,
-    // Auto-verified immediately!
+    emailConfirmed: false,
     createdAt: (/* @__PURE__ */ new Date()).toISOString(),
     updatedAt: (/* @__PURE__ */ new Date()).toISOString()
   };
@@ -2381,13 +2389,12 @@ async function signUpUser(emailOrOptions, maybePassword, maybeFullName, maybeAva
     avatarUrl: newUser.avatarUrl,
     deviceName: newUser.deviceName,
     createdAt: newUser.createdAt,
-    emailConfirmed: true
+    emailConfirmed: false
   };
-  localStorage.setItem(STORAGE_CURRENT_USER, JSON.stringify(createdProfile));
   return {
     success: true,
-    needsEmailVerification: false,
-    // Instant entry, no OTP wait
+    needsEmailVerification: true,
+    debugCode: code,
     user: createdProfile
   };
 }
@@ -2617,7 +2624,7 @@ function quickGuestLogin() {
     avatarUrl: profile.avatarUrl,
     deviceName: profile.deviceName,
     emailConfirmed: true,
-    createdAt: profile.createdAt,
+    createdAt: profile.createdAt || (/* @__PURE__ */ new Date()).toISOString(),
     updatedAt: (/* @__PURE__ */ new Date()).toISOString()
   };
   users.push(newUser);
@@ -5487,6 +5494,15 @@ function App() {
     let mounted = true;
     getActiveUser().then((user) => {
       if (mounted) {
+        if (!user && typeof window !== "undefined") {
+          const params = new URLSearchParams(window.location.search);
+          if (params.has("code") || params.has("join")) {
+            const guest = quickGuestLogin();
+            setCurrentUser(guest);
+            setIsAuthLoading(false);
+            return;
+          }
+        }
         setCurrentUser(user);
         setIsAuthLoading(false);
       }
